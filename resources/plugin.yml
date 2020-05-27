@@ -1,0 +1,6 @@
+name: TCHardcore
+version: 1.0.0
+description: Teamcraft hardcore features
+author: Jeremaster101
+main: com.teamcraft.tchardcore.TCHardcore
+api-version: 1.13
