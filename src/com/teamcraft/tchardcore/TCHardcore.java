@@ -1,7 +1,9 @@
 package com.teamcraft.tchardcore;
 
 import com.teamcraft.tchardcore.listeners.DeathListener;
+import com.teamcraft.tchardcore.listeners.PVPListener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * main class of plugin
@@ -27,6 +29,13 @@ public class TCHardcore extends JavaPlugin {
         listFile = new ConfigFile();
         listFile.initialize();
         plugin.getServer().getPluginManager().registerEvents(new DeathListener(), this);
+        plugin.getServer().getPluginManager().registerEvents(new PVPListener(), this);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                PvPHandler.tickPlayers();
+            }
+        }.runTaskTimer(plugin, 20, 20);
     }
     
     /**
