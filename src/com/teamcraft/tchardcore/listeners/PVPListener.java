@@ -6,12 +6,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
  * listener class related to the anti-pvp mechanic
  */
 public class PVPListener implements Listener {
     
+    /**
+     * cancels the pvp event if one or the other parties has pvp disabled
+     *
+     * @param e
+     */
     public void onPvP(EntityDamageByEntityEvent e){
         if(e.getDamager() instanceof Player damager && e.getEntity() instanceof Player player) {
             if(!PvPHandler.getPvPTimes().containsKey(player) || !PvPHandler.getPvPTimes().containsKey(damager) ||
@@ -22,8 +28,24 @@ public class PVPListener implements Listener {
         }
     }
     
+    /**
+     * starts or reloads a player's clock on join
+     *
+     * @param e
+     */
     public void onJoin(PlayerJoinEvent e) {
-        PvPHandler.initPlayer(e.getPlayer());
+        Player player = e.getPlayer();
+        PvPHandler.initPlayer(player);
+    }
+    
+    /**
+     * save a player's time when they leave
+     *
+     * @param e
+     */
+    public void onQuit(PlayerQuitEvent e) {
+        Player player = e.getPlayer();
+        PvPHandler.savePlayer(player);
     }
 
 }
