@@ -4,6 +4,8 @@ import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
 import com.teamcraft.tchardcore.listeners.DeathListener;
 import com.teamcraft.tchardcore.listeners.PVPListener;
+import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -23,11 +25,17 @@ public class TCHardcore extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        plugin.getServer().getPluginManager().registerEvents(new DeathListener(), this);
-        plugin.getServer().getPluginManager().registerEvents(new PVPListener(), this);
+        PluginManager pm = plugin.getServer().getPluginManager();
+        pm.registerEvents(new DeathListener(), this);
+        pm.registerEvents(new PVPListener(), this);
+        CommandExec commandExec = new CommandExec();
+        getCommand("tchcreload").setExecutor(commandExec);
+        getCommand("pvptime").setExecutor(commandExec);
+        pm.addPermission(new Permission("tchc.admin"));
         Configs.getConfig(ConfigType.MESSAGE).saveDefaultConfig();
         Configs.getConfig(ConfigType.TIME).saveDefaultConfig();
         Configs.getConfig(ConfigType.PLAYERS).saveDefaultConfig();
+        Message.reloadMessages();
         
         // tick player timers every second
         new BukkitRunnable() {

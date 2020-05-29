@@ -40,8 +40,9 @@ public class PvPHandler {
             if (time > 0)
                 pvpplayers.put(player, time);
         } else {
-            pvpplayers.put(player, 15 * 60);
-            player.sendMessage(ChatColor.GREEN + "PvP is disabled for 15 minutes for yourself.");
+            int time = Configs.getConfig(ConfigType.TIME).getConfig().getInt("pvp-countdown-seconds");
+            pvpplayers.put(player, time);
+            player.sendMessage(Message.PVP_DISABLED.replace("$TIME$", Message.convertTime(time)));
         }
     }
     
@@ -54,7 +55,7 @@ public class PvPHandler {
                 YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
                 players.set("pvp-times." + player.getUniqueId().toString(), 0);
                 pvpplayers.remove(player);
-                player.sendMessage(ChatColor.RED + "PvP is now enabled for yourself.");
+                player.sendMessage(Message.PVP_ENABLED);
             }
             pvpplayers.put(player, pvpplayers.get(player) - 1);
         }

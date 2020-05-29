@@ -40,6 +40,16 @@ public class Message {
     }
     
     /**
+     * convert a time in seconds to a string for messages in minutes and seconds
+     *
+     * @param seconds seconds to convert
+     * @return string formatted as 0m 0s
+     */
+    public static String convertTime(int seconds) {
+        return (seconds/60) + "m" + (seconds%60) + "s";
+    }
+    
+    /**
      * help message
      */
     public static String[] HELP = new String[]{
