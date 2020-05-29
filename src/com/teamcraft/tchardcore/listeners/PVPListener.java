@@ -19,7 +19,9 @@ public class PVPListener implements Listener {
      * @param e
      */
     public void onPvP(EntityDamageByEntityEvent e){
-        if(e.getDamager() instanceof Player damager && e.getEntity() instanceof Player player) {
+        if(e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
+            Player damager = (Player) e.getDamager();
+            Player player = (Player) e.getEntity();
             if(!PvPHandler.getPvPTimes().containsKey(player) || !PvPHandler.getPvPTimes().containsKey(damager) ||
                     PvPHandler.getPvPTimes().get(player) == 0 || PvPHandler.getPvPTimes().get(damager) == 0) {
                 e.setCancelled(true);

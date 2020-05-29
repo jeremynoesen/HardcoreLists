@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TCHardcore">
+    <output-path>$PROJECT_DIR$/out/artifacts/TCHardcore</output-path>
+    <root id="archive" name="TCHardcore.jar">
+      <element id="module-output" name="TCHardcore" />
+    </root>
+  </artifact>
+</component>
