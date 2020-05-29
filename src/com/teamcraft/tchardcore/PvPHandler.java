@@ -30,7 +30,8 @@ public class PvPHandler {
      * @param player player to initialize
      */
     public static void initPlayer(Player player) {
-        if (TCHardcore.getListFile().getFile().getConfigurationSection("pvp-times").getKeys(false).contains(player.getUniqueId().toString())) {
+        if (TCHardcore.getListFile().getFile().getConfigurationSection("pvp-times") != null &&
+                TCHardcore.getListFile().getFile().getConfigurationSection("pvp-times").getKeys(false).contains(player.getUniqueId().toString())) {
             int time = TCHardcore.getListFile().getFile().getInt("pvp-times." + player.getUniqueId().toString());
             if (time > 0)
                 pvpplayers.put(player, time);
@@ -62,10 +63,9 @@ public class PvPHandler {
     public static void savePlayer(Player player) {
         if(pvpplayers.containsKey(player)) {
             TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), PvPHandler.getPvPTimes().get(player));
-            pvpplayers.remove(player);
         } else {
             TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), "0");
-            pvpplayers.remove(player);
         }
+        pvpplayers.remove(player);
     }
 }
