@@ -1,9 +1,11 @@
 package com.teamcraft.tchardcore;
 
+import com.teamcraft.tchardcore.command.CommandExec;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
-import com.teamcraft.tchardcore.listeners.DeathListener;
-import com.teamcraft.tchardcore.listeners.PVPListener;
+import com.teamcraft.tchardcore.handler.PvPHandler;
+import com.teamcraft.tchardcore.listener.DeathListener;
+import com.teamcraft.tchardcore.listener.PVPListener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,7 +22,7 @@ public class TCHardcore extends JavaPlugin {
     private static TCHardcore plugin;
     
     /**
-     * run when the server starts up
+     * initialize all files, commands, listeners, and start player timer ticker
      */
     @Override
     public void onEnable() {

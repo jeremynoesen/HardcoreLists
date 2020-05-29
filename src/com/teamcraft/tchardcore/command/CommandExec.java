@@ -1,4 +1,4 @@
-package com.teamcraft.tchardcore;
+package com.teamcraft.tchardcore.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

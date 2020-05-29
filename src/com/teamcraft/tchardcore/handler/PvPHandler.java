@@ -1,8 +1,8 @@
-package com.teamcraft.tchardcore;
+package com.teamcraft.tchardcore.handler;
 
+import com.teamcraft.tchardcore.Message;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
