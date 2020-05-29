@@ -17,6 +17,10 @@ public class Message {
     public static String PVP_DISABLED;
     public static String CANT_HURT;
     public static String CHECK_TIME;
+    public static String UNKNOWN_COMMAND;
+    public static String NO_PERMISSION;
+    public static String RELOAD;
+    public static String SET_TIME;
     
     /**
      * loads/reloads messages from file
@@ -27,6 +31,11 @@ public class Message {
         PVP_DISABLED = PREFIX + format(messageConfig.getConfig().getString("PVP_DISABLED"));
         CANT_HURT = PREFIX + format(messageConfig.getConfig().getString("CANT_HURT"));
         CHECK_TIME = PREFIX + format(messageConfig.getConfig().getString("CHECK_TIME"));
+        UNKNOWN_COMMAND = PREFIX + format(messageConfig.getConfig().getString("UNKNOWN_COMMAND"));
+        NO_PERMISSION = PREFIX + format(messageConfig.getConfig().getString("NO_PERMISSION"));
+        RELOAD = PREFIX + format(messageConfig.getConfig().getString("RELOAD"));
+        SET_TIME = PREFIX + format(messageConfig.getConfig().getString("SET_TIME"));
+    
     }
     
     /**

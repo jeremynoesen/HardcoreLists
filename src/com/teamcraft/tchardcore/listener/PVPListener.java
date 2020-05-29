@@ -49,8 +49,6 @@ public class PVPListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         PvPHandler.initPlayer(player);
-        player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                Message.convertTime(PvPHandler.getPvPTimes().get(player))));
     }
     
     /**
