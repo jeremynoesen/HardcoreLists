@@ -3,6 +3,7 @@ package com.teamcraft.tchardcore.listeners;
 import com.teamcraft.tchardcore.PvPHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -18,6 +19,7 @@ public class PVPListener implements Listener {
      *
      * @param e
      */
+    @EventHandler
     public void onPvP(EntityDamageByEntityEvent e){
         if(e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
             Player damager = (Player) e.getDamager();
@@ -35,6 +37,7 @@ public class PVPListener implements Listener {
      *
      * @param e
      */
+    @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         PvPHandler.initPlayer(player);
@@ -45,6 +48,7 @@ public class PVPListener implements Listener {
      *
      * @param e
      */
+    @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         PvPHandler.savePlayer(player);
