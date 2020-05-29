@@ -1,7 +1,7 @@
 package com.teamcraft.tchardcore.listeners;
 
+import com.teamcraft.tchardcore.Message;
 import com.teamcraft.tchardcore.PvPHandler;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -27,7 +27,7 @@ public class PVPListener implements Listener {
             Player player = (Player) e.getEntity();
             if(PvPHandler.getPvPTimes().containsKey(player) || PvPHandler.getPvPTimes().containsKey(damager)) {
                 e.setCancelled(true);
-                damager.sendMessage(ChatColor.YELLOW + "You cannot hurt this player yet!"); //todo tell remaining time
+                damager.sendMessage(Message.CANT_HURT);
             }
         } else if(e.getDamager() instanceof Projectile && e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
@@ -35,7 +35,7 @@ public class PVPListener implements Listener {
             if(PvPHandler.getPvPTimes().containsKey(player) || (damager.getShooter() instanceof Player &&
                     PvPHandler.getPvPTimes().containsKey((Player) damager.getShooter()))) {
                 e.setCancelled(true);
-                ((Player) damager.getShooter()).sendMessage(ChatColor.YELLOW + "You cannot hurt this player yet!");
+                ((Player) damager.getShooter()).sendMessage(Message.CANT_HURT);
             }
         }
     }
@@ -49,6 +49,8 @@ public class PVPListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         PvPHandler.initPlayer(player);
+        player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
+                Message.convertTime(PvPHandler.getPvPTimes().get(player))));
     }
     
     /**
