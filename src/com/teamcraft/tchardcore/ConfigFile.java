@@ -24,7 +24,7 @@ public class ConfigFile {
     /**
      * name of file
      */
-    private String fileName = "players.yml";
+    private final String fileName = "players.yml";
     
     /**
      * reload the file, reset it if it is missing
