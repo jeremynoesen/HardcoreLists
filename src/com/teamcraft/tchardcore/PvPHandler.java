@@ -1,6 +1,9 @@
 package com.teamcraft.tchardcore;
 
+import com.teamcraft.tchardcore.config.ConfigType;
+import com.teamcraft.tchardcore.config.Configs;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -29,10 +32,11 @@ public class PvPHandler {
      *
      * @param player player to initialize
      */
-    public static void initPlayer(Player player) {
-        if (TCHardcore.getListFile().getFile().getConfigurationSection("pvp-times") != null &&
-                TCHardcore.getListFile().getFile().getConfigurationSection("pvp-times").getKeys(false).contains(player.getUniqueId().toString())) {
-            int time = TCHardcore.getListFile().getFile().getInt("pvp-times." + player.getUniqueId().toString());
+    public static void initPlayer(Player player) { //todo tell remaining time
+        YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
+        if (players.getConfigurationSection("pvp-times") != null &&
+                players.getConfigurationSection("pvp-times").getKeys(false).contains(player.getUniqueId().toString())) {
+            int time = players.getInt("pvp-times." + player.getUniqueId().toString());
             if (time > 0)
                 pvpplayers.put(player, time);
         } else {
@@ -47,7 +51,8 @@ public class PvPHandler {
     public static void tickPlayers() {
         for (Player player : pvpplayers.keySet()) {
             if (pvpplayers.get(player) == 0) {
-                TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), 0);
+                YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
+                players.set("pvp-times." + player.getUniqueId().toString(), 0);
                 pvpplayers.remove(player);
                 player.sendMessage(ChatColor.RED + "PvP is now enabled for yourself.");
             }
@@ -61,10 +66,11 @@ public class PvPHandler {
      * @param player player to save
      */
     public static void savePlayer(Player player) {
+        YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
         if(pvpplayers.containsKey(player)) {
-            TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), PvPHandler.getPvPTimes().get(player));
+            players.set("pvp-times." + player.getUniqueId().toString(), PvPHandler.getPvPTimes().get(player));
         } else {
-            TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), 0);
+            players.set("pvp-times." + player.getUniqueId().toString(), 0);
         }
         pvpplayers.remove(player);
     }
