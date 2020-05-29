@@ -27,7 +27,7 @@ public class PVPListener implements Listener {
             Player player = (Player) e.getEntity();
             if(PvPHandler.getPvPTimes().containsKey(player) || PvPHandler.getPvPTimes().containsKey(damager)) {
                 e.setCancelled(true);
-                damager.sendMessage(ChatColor.YELLOW + "You cannot hurt this player yet!");
+                damager.sendMessage(ChatColor.YELLOW + "You cannot hurt this player yet!"); //todo tell remaining time
             }
         } else if(e.getDamager() instanceof Projectile && e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
@@ -35,7 +35,7 @@ public class PVPListener implements Listener {
             if(PvPHandler.getPvPTimes().containsKey(player) || (damager.getShooter() instanceof Player &&
                     PvPHandler.getPvPTimes().containsKey((Player) damager.getShooter()))) {
                 e.setCancelled(true);
-                damager.sendMessage(ChatColor.YELLOW + "You cannot hurt this player yet!");
+                ((Player) damager.getShooter()).sendMessage(ChatColor.YELLOW + "You cannot hurt this player yet!");
             }
         }
     }

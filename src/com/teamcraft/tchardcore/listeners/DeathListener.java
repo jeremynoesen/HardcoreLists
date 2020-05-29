@@ -1,6 +1,10 @@
 package com.teamcraft.tchardcore.listeners;
 
 import com.teamcraft.tchardcore.TCHardcore;
+import com.teamcraft.tchardcore.config.Config;
+import com.teamcraft.tchardcore.config.ConfigType;
+import com.teamcraft.tchardcore.config.Configs;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,11 +24,12 @@ public class DeathListener implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         Player player = e.getEntity();
-        if (TCHardcore.getListFile().getFile().getConfigurationSection("alive") != null &&
-                TCHardcore.getListFile().getFile().getConfigurationSection("alive").getKeys(false).contains(player.getUniqueId().toString())) {
-            TCHardcore.getListFile().getFile().set("alive." + player.getUniqueId(), null);
+        YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
+        if (players.getConfigurationSection("alive") != null &&
+                players.getConfigurationSection("alive").getKeys(false).contains(player.getUniqueId().toString())) {
+            players.set("alive." + player.getUniqueId(), null);
         }
-        TCHardcore.getListFile().getFile().set("dead." + player.getUniqueId(), player.getName());
+        players.set("dead." + player.getUniqueId(), player.getName());
     }
     
     /**
@@ -36,11 +41,12 @@ public class DeathListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        if (TCHardcore.getListFile().getFile().getConfigurationSection("dead") == null ||
-                !TCHardcore.getListFile().getFile().getConfigurationSection("dead").getKeys(false).contains(player.getUniqueId().toString())) {
-            TCHardcore.getListFile().getFile().set("alive." + player.getUniqueId(), player.getName());
+        YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
+        if (players.getConfigurationSection("dead") == null ||
+                !players.getConfigurationSection("dead").getKeys(false).contains(player.getUniqueId().toString())) {
+            players.set("alive." + player.getUniqueId(), player.getName());
         }
-        TCHardcore.getListFile().getFile().set("all." + player.getUniqueId(), player.getName());
+        players.set("all." + player.getUniqueId(), player.getName());
     }
     
 }
