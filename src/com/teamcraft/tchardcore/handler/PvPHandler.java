@@ -37,8 +37,11 @@ public class PvPHandler {
         if (players.getConfigurationSection("pvp-times") != null &&
                 players.getConfigurationSection("pvp-times").getKeys(false).contains(player.getUniqueId().toString())) {
             int time = players.getInt("pvp-times." + player.getUniqueId().toString());
-            if (time > 0)
+            if (time > 0) {
                 pvpplayers.put(player, time);
+                player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
+                        Message.convertTime(PvPHandler.getPvPTimes().get(player))));
+            }
         } else {
             int time = Configs.getConfig(ConfigType.TIME).getConfig().getInt("pvp-countdown-seconds");
             pvpplayers.put(player, time);
