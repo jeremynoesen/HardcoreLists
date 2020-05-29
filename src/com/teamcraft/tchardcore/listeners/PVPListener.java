@@ -3,6 +3,7 @@ package com.teamcraft.tchardcore.listeners;
 import com.teamcraft.tchardcore.PvPHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,8 +25,15 @@ public class PVPListener implements Listener {
         if(e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
             Player damager = (Player) e.getDamager();
             Player player = (Player) e.getEntity();
-            if(!PvPHandler.getPvPTimes().containsKey(player) || !PvPHandler.getPvPTimes().containsKey(damager) ||
-                    PvPHandler.getPvPTimes().get(player) == 0 || PvPHandler.getPvPTimes().get(damager) == 0) {
+            if(PvPHandler.getPvPTimes().containsKey(player) || PvPHandler.getPvPTimes().containsKey(damager)) {
+                e.setCancelled(true);
+                damager.sendMessage(ChatColor.YELLOW + "You cannot hurt this player yet!");
+            }
+        } else if(e.getDamager() instanceof Projectile && e.getEntity() instanceof Player) {
+            Player player = (Player) e.getEntity();
+            Projectile damager = (Projectile) e.getDamager();
+            if(PvPHandler.getPvPTimes().containsKey(player) || (damager.getShooter() instanceof Player &&
+                    PvPHandler.getPvPTimes().containsKey((Player) damager.getShooter()))) {
                 e.setCancelled(true);
                 damager.sendMessage(ChatColor.YELLOW + "You cannot hurt this player yet!");
             }
