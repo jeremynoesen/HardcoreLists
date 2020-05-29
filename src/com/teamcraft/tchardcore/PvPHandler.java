@@ -47,7 +47,7 @@ public class PvPHandler {
     public static void tickPlayers() {
         for (Player player : pvpplayers.keySet()) {
             if (pvpplayers.get(player) == 0) {
-                TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), "0");
+                TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), 0);
                 pvpplayers.remove(player);
                 player.sendMessage(ChatColor.RED + "PvP is now enabled for yourself.");
             }
@@ -64,7 +64,7 @@ public class PvPHandler {
         if(pvpplayers.containsKey(player)) {
             TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), PvPHandler.getPvPTimes().get(player));
         } else {
-            TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), "0");
+            TCHardcore.getListFile().getFile().set("pvp-times." + player.getUniqueId().toString(), 0);
         }
         pvpplayers.remove(player);
     }
