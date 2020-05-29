@@ -16,7 +16,7 @@ public class TCHardcore extends JavaPlugin {
     /**
      * the list file
      */
-    private static ListFile listFile;
+    private static ConfigFile listFile;
     
     /**
      * run when the server starts up
@@ -24,7 +24,7 @@ public class TCHardcore extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        listFile = new ListFile();
+        listFile = new ConfigFile();
         listFile.initialize();
         plugin.getServer().getPluginManager().registerEvents(new DeathListener(), this);
     }
@@ -53,7 +53,7 @@ public class TCHardcore extends JavaPlugin {
      *
      * @return list file instance
      */
-    public static ListFile getListFile() {
+    public static ConfigFile getListFile() {
         return listFile;
     }
 }
