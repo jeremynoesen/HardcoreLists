@@ -1,7 +1,5 @@
-package com.teamcraft.tchardcore.listeners;
+package com.teamcraft.tchardcore.listener;
 
-import com.teamcraft.tchardcore.TCHardcore;
-import com.teamcraft.tchardcore.config.Config;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
 import org.bukkit.configuration.file.YamlConfiguration;

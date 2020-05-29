@@ -1,7 +1,7 @@
-package com.teamcraft.tchardcore.listeners;
+package com.teamcraft.tchardcore.listener;
 
 import com.teamcraft.tchardcore.Message;
-import com.teamcraft.tchardcore.PvPHandler;
+import com.teamcraft.tchardcore.handler.PvPHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;

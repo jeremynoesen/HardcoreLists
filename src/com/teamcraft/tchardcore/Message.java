@@ -71,7 +71,8 @@ public class Message {
                     ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
                     + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]-------------",
             ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View time remaining on your pvp timer",
-            ChatColor.GRAY + "/tchcreload" + ChatColor.WHITE + ": Reload all files for plugin",
+            ChatColor.GRAY + "/tchc reload" + ChatColor.WHITE + ": Reload all files for plugin",
+            ChatColor.GRAY + "/tchc settime <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
             ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "---------------------------------------",
             ""
     };
