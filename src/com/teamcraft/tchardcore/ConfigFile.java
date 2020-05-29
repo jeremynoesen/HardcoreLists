@@ -9,10 +9,10 @@ import java.util.logging.Level;
 /**
  * list file for deaths
  */
-public class ListFile {
+public class ConfigFile {
     
     /**
-     * file with the list of players
+     * config gile
      */
     private File file;
     
@@ -22,12 +22,12 @@ public class ListFile {
     private YamlConfiguration yml;
     
     /**
-     * name of list file
+     * name of file
      */
     private String fileName = "players.yml";
     
     /**
-     * reload the list file, reset it if it is missing
+     * reload the file, reset it if it is missing
      */
     public void reload() {
         if (file == null) {
@@ -44,7 +44,7 @@ public class ListFile {
     }
     
     /**
-     * get the YAML file with the list
+     * get the YAML file
      *
      * @return yml YamlConfiguration
      */
