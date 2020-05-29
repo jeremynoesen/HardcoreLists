@@ -30,6 +30,8 @@ public class TCHardcore extends JavaPlugin {
         listFile.initialize();
         plugin.getServer().getPluginManager().registerEvents(new DeathListener(), this);
         plugin.getServer().getPluginManager().registerEvents(new PVPListener(), this);
+        
+        // tick player timers every second
         new BukkitRunnable() {
             @Override
             public void run() {
