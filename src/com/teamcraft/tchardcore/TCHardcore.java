@@ -1,5 +1,7 @@
 package com.teamcraft.tchardcore;
 
+import com.teamcraft.tchardcore.config.ConfigType;
+import com.teamcraft.tchardcore.config.Configs;
 import com.teamcraft.tchardcore.listeners.DeathListener;
 import com.teamcraft.tchardcore.listeners.PVPListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +25,9 @@ public class TCHardcore extends JavaPlugin {
         plugin = this;
         plugin.getServer().getPluginManager().registerEvents(new DeathListener(), this);
         plugin.getServer().getPluginManager().registerEvents(new PVPListener(), this);
+        Configs.getConfig(ConfigType.MESSAGE).saveDefaultConfig();
+        Configs.getConfig(ConfigType.TIME).saveDefaultConfig();
+        Configs.getConfig(ConfigType.PLAYERS).saveDefaultConfig();
         
         // tick player timers every second
         new BukkitRunnable() {
@@ -39,6 +44,9 @@ public class TCHardcore extends JavaPlugin {
     @Override
     public void onDisable() {
         plugin = null;
+        Configs.getConfig(ConfigType.MESSAGE).saveConfig();
+        Configs.getConfig(ConfigType.TIME).saveConfig();
+        Configs.getConfig(ConfigType.PLAYERS).saveConfig();
     }
     
     /**
