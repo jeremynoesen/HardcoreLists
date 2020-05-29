@@ -1,0 +1,5 @@
+PREFIX: "&8[&5T&dC&8] "
+PVP_ENABLED: "&7You can now PvP."
+PVP_DISABLED: "&7You can PvP in $TIME$."
+CANT_HURT: "&7This player cannot PvP yet!"
+CHECK_TIME: "&7You can PvP in $TIME$."
