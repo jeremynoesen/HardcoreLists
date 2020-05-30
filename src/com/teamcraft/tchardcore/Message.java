@@ -59,22 +59,9 @@ public class Message {
     }
     
     /**
-     * help message
-     */
-    public static String[] HELP = new String[]{
-            "",
-            ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "-------------[" + PREFIX +
-                    ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
-                    + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]-------------",
-            ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View time remaining on your pvp timer",
-            ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "---------------------------------------",
-            ""
-    };
-    
-    /**
      * help message for admins
      */
-    public static String[] ADMIN_HELP = new String[]{
+    public static String[] HELP = new String[]{
             "",
             ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "-------------[" + PREFIX +
                     ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
