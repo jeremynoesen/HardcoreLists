@@ -21,6 +21,7 @@ public class Message {
     public static String NO_PERMISSION;
     public static String RELOAD;
     public static String SET_TIME;
+    public static String[] HELP;
     
     /**
      * loads/reloads messages from file
@@ -36,6 +37,17 @@ public class Message {
         RELOAD = PREFIX + format(messageConfig.getConfig().getString("RELOAD"));
         SET_TIME = PREFIX + format(messageConfig.getConfig().getString("SET_TIME"));
     
+        HELP = new String[]{
+                "",
+                ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "-------------[" + PREFIX +
+                        ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
+                        + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]-------------",
+                ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View time remaining on your pvp timer",
+                ChatColor.GRAY + "/tchc reload" + ChatColor.WHITE + ": Reload all files for plugin",
+                ChatColor.GRAY + "/tchc settime <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
+                ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------------------------------",
+                ""
+        };
     }
     
     /**
@@ -55,21 +67,6 @@ public class Message {
      * @return string formatted as 0m 0s
      */
     public static String convertTime(int seconds) {
-        return (seconds/60) + "m" + (seconds%60) + "s";
+        return (seconds/60) + "m " + (seconds%60) + "s";
     }
-    
-    /**
-     * help message for admins
-     */
-    public static String[] HELP = new String[]{
-            "",
-            ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "-------------[" + PREFIX +
-                    ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
-                    + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]-------------",
-            ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View time remaining on your pvp timer",
-            ChatColor.GRAY + "/tchc reload" + ChatColor.WHITE + ": Reload all files for plugin",
-            ChatColor.GRAY + "/tchc settime <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
-            ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "---------------------------------------",
-            ""
-    };
 }
