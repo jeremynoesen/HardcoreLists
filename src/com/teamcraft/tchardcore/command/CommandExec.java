@@ -33,20 +33,24 @@ public class CommandExec implements CommandExecutor {
                 case "pvptime":
                     if (player.hasPermission("tchc.admin")) {
                         if (args.length > 0) {
-                            Player other = Bukkit.getPlayer(args[0]);
-                            if (other.isOnline()) {
+                            try {
+                                Player other = Bukkit.getPlayer(args[0]);
+                                assert other.isOnline();
                                 player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                        Message.convertTime(PvPHandler.getPlayerTime(other))));
-                            } else {
+                                        Message.convertTime(PvPHandler.getPlayerTime(other)))
+                                        .replace("$PLAYER$", other.getName()));
+                            } catch (Exception e) {
                                 player.sendMessage(Message.PLAYER_OFFLINE);
                             }
                         } else {
                             player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                    Message.convertTime(PvPHandler.getPlayerTime(player))));
+                                    Message.convertTime(PvPHandler.getPlayerTime(player)))
+                                    .replace("$PLAYER$", "You"));
                         }
                     } else {
                         player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                Message.convertTime(PvPHandler.getPlayerTime(player))));
+                                Message.convertTime(PvPHandler.getPlayerTime(player)))
+                                .replace("$PLAYER$", "You"));
                     }
                     break;
                 case "tchc":

@@ -43,7 +43,7 @@ public class PvPHandler {
      *
      * @param player player to initialize
      */
-    public static void initPlayer(Player player) { //todo tell remaining time
+    public static void initPlayer(Player player) {
         YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
         if (players.getConfigurationSection("pvp-times") != null &&
                 players.getConfigurationSection("pvp-times").getKeys(false).contains(player.getUniqueId().toString())) {
@@ -51,7 +51,8 @@ public class PvPHandler {
             if (time > 0) {
                 pvpplayers.put(player, time);
                 player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                        Message.convertTime(PvPHandler.getPlayerTime(player))));
+                        Message.convertTime(PvPHandler.getPlayerTime(player)))
+                .replace("$PLAYER$","You"));
             }
         } else {
             int time = Configs.getConfig(ConfigType.TIME).getConfig().getInt("pvp-countdown-seconds");
