@@ -1,6 +1,7 @@
 package com.teamcraft.tchardcore;
 
 import com.teamcraft.tchardcore.command.CommandExec;
+import com.teamcraft.tchardcore.command.CommandTabComplete;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
 import com.teamcraft.tchardcore.handler.PvPHandler;
@@ -31,8 +32,9 @@ public class TCHardcore extends JavaPlugin {
         pm.registerEvents(new DeathListener(), this);
         pm.registerEvents(new PVPListener(), this);
         CommandExec commandExec = new CommandExec();
-        getCommand("tchcreload").setExecutor(commandExec);
+        getCommand("tchc").setExecutor(commandExec);
         getCommand("pvptime").setExecutor(commandExec);
+        getCommand("tchc").setTabCompleter(new CommandTabComplete());
         pm.addPermission(new Permission("tchc.admin"));
         Configs.getConfig(ConfigType.MESSAGE).saveDefaultConfig();
         Configs.getConfig(ConfigType.TIME).saveDefaultConfig();
