@@ -25,18 +25,17 @@ public class CommandTabComplete implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String label, String[] args) {
         List<String> list = new ArrayList<>();
-    
-        if(commandSender instanceof Player) {
+        
+        if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
             if (label.equalsIgnoreCase("tchc") && player.hasPermission("tchc.admin")) {
-                if(args[0].toLowerCase().startsWith("")) {
+                if (args[0].toLowerCase().startsWith("h")) list.add("help");
+                else if (args[0].toLowerCase().startsWith("r")) list.add("reload");
+                else if (args[0].toLowerCase().startsWith("s")) list.add("settime");
+                else if (args[0].toLowerCase().startsWith("")) {
                     list.add("help");
                     list.add("reload");
                     list.add("settime");
-                } else {
-                    if (args[0].toLowerCase().startsWith("h")) list.add("help");
-                    if (args[0].toLowerCase().startsWith("r")) list.add("reload");
-                    if (args[0].toLowerCase().startsWith("s")) list.add("settime");
                 }
             }
         }
