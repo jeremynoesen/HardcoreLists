@@ -4,3 +4,11 @@ description: Teamcraft hardcore features
 author: Jeremaster101
 main: com.teamcraft.tchardcore.TCHardcore
 api-version: 1.13
+commands:
+  pvptime:
+    description: Get the time remaining on your pvp timer
+    usage: /<command>
+  tchc:
+    description: TCHardcore admin command. Use /tchc help
+    usage: /<command>
+

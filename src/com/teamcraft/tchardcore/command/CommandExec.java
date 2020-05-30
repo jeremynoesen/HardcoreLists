@@ -42,6 +42,9 @@ public class CommandExec implements CommandExecutor {
                                 Configs.getConfig(ConfigType.PLAYERS).reloadConfig();
                                 player.sendMessage(Message.RELOAD);
                                 break;
+                            case "help":
+                                player.sendMessage(Message.HELP);
+                                break;
                             case "settime":
                                 Configs.getConfig(ConfigType.TIME).getConfig()
                                         .set("pvp-countdown-seconds", Integer.valueOf(args[1]));

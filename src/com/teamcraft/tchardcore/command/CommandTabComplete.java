@@ -30,11 +30,14 @@ public class CommandTabComplete implements TabCompleter {
             Player player = (Player) commandSender;
             if (label.equalsIgnoreCase("tchc") && player.hasPermission("tchc.admin")) {
                 if(args[0].toLowerCase().startsWith("")) {
+                    list.add("help");
                     list.add("reload");
                     list.add("settime");
+                } else {
+                    if (args[0].toLowerCase().startsWith("h")) list.add("help");
+                    if (args[0].toLowerCase().startsWith("r")) list.add("reload");
+                    if (args[0].toLowerCase().startsWith("s")) list.add("settime");
                 }
-                if(args[0].toLowerCase().startsWith("r")) list.add("reload");
-                if(args[0].toLowerCase().startsWith("s")) list.add("settime");
             }
         }
         

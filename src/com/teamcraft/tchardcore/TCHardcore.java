@@ -28,18 +28,18 @@ public class TCHardcore extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        PluginManager pm = plugin.getServer().getPluginManager();
-        pm.registerEvents(new DeathListener(), this);
-        pm.registerEvents(new PVPListener(), this);
-        CommandExec commandExec = new CommandExec();
-        getCommand("tchc").setExecutor(commandExec);
-        getCommand("pvptime").setExecutor(commandExec);
-        getCommand("tchc").setTabCompleter(new CommandTabComplete());
-        pm.addPermission(new Permission("tchc.admin"));
         Configs.getConfig(ConfigType.MESSAGE).saveDefaultConfig();
         Configs.getConfig(ConfigType.TIME).saveDefaultConfig();
         Configs.getConfig(ConfigType.PLAYERS).saveDefaultConfig();
         Message.reloadMessages();
+        PluginManager pm = plugin.getServer().getPluginManager();
+        pm.registerEvents(new DeathListener(), this);
+        pm.registerEvents(new PVPListener(), this);
+        pm.addPermission(new Permission("tchc.admin"));
+        CommandExec commandExec = new CommandExec();
+        getCommand("tchc").setExecutor(commandExec);
+        getCommand("pvptime").setExecutor(commandExec);
+        getCommand("tchc").setTabCompleter(new CommandTabComplete());
         
         // tick player timers every second
         new BukkitRunnable() {
