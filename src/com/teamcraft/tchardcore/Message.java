@@ -21,6 +21,7 @@ public class Message {
     public static String NO_PERMISSION;
     public static String RELOAD;
     public static String SET_TIME;
+    public static String PLAYER_OFFLINE;
     public static String[] HELP;
     
     /**
@@ -36,6 +37,7 @@ public class Message {
         NO_PERMISSION = PREFIX + format(messageConfig.getConfig().getString("NO_PERMISSION"));
         RELOAD = PREFIX + format(messageConfig.getConfig().getString("RELOAD"));
         SET_TIME = PREFIX + format(messageConfig.getConfig().getString("SET_TIME"));
+        PLAYER_OFFLINE = PREFIX + format(messageConfig.getConfig().getString("PLAYER_OFFLINE"));
     
         HELP = new String[]{
                 "",
@@ -43,7 +45,8 @@ public class Message {
                         ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
                         + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]-------------",
                 ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View time remaining on your pvp timer",
-                ChatColor.GRAY + "/tchc reload" + ChatColor.WHITE + ": Reload all files for plugin",
+                ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View time remaining on an online player's pvp timer",
+                ChatColor.GRAY + "/tchc reload" + ChatColor.WHITE + ": Reload all config and data files for the plugin",
                 ChatColor.GRAY + "/tchc settime <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
                 ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------------------------------",
                 ""

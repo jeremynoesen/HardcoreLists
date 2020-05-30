@@ -28,6 +28,17 @@ public class PvPHandler {
     }
     
     /**
+     * get a player's remaining time until they can pvp
+     *
+     * @param player player to get time for
+     * @return time left on their clock
+     */
+    public static int getPlayerTime(Player player) {
+        if(pvpplayers.containsKey(player)) return pvpplayers.get(player);
+        return 0;
+    }
+    
+    /**
      * initialize a player's pvp timer, either starting it or resuming it from the last known time
      *
      * @param player player to initialize
@@ -40,7 +51,7 @@ public class PvPHandler {
             if (time > 0) {
                 pvpplayers.put(player, time);
                 player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                        Message.convertTime(PvPHandler.getPvPTimes().get(player))));
+                        Message.convertTime(PvPHandler.getPlayerTime(player))));
             }
         } else {
             int time = Configs.getConfig(ConfigType.TIME).getConfig().getInt("pvp-countdown-seconds");
@@ -72,7 +83,7 @@ public class PvPHandler {
     public static void savePlayer(Player player) {
         YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
         if(pvpplayers.containsKey(player)) {
-            players.set("pvp-times." + player.getUniqueId().toString(), PvPHandler.getPvPTimes().get(player));
+            players.set("pvp-times." + player.getUniqueId().toString(), PvPHandler.getPlayerTime(player));
         } else {
             players.set("pvp-times." + player.getUniqueId().toString(), 0);
         }

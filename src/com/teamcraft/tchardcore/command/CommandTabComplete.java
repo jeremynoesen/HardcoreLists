@@ -28,7 +28,7 @@ public class CommandTabComplete implements TabCompleter {
         
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (label.equalsIgnoreCase("tchc") && player.hasPermission("tchc.admin")) {
+            if (label.equalsIgnoreCase("tchc") && player.hasPermission("tchc.admin") && args.length == 1) {
                 if (args[0].toLowerCase().startsWith("h")) list.add("help");
                 else if (args[0].toLowerCase().startsWith("r")) list.add("reload");
                 else if (args[0].toLowerCase().startsWith("s")) list.add("settime");

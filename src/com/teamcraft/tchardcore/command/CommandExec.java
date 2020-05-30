@@ -4,6 +4,7 @@ import com.teamcraft.tchardcore.Message;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
 import com.teamcraft.tchardcore.handler.PvPHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,8 +31,23 @@ public class CommandExec implements CommandExecutor {
             Player player = (Player) commandSender;
             switch (label.toLowerCase()) {
                 case "pvptime":
-                    player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                            Message.convertTime(PvPHandler.getPvPTimes().get(player))));
+                    if (player.hasPermission("tchc.admin")) {
+                        if (args.length > 0) {
+                            Player other = Bukkit.getPlayer(args[0]);
+                            if (other.isOnline()) {
+                                player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
+                                        Message.convertTime(PvPHandler.getPlayerTime(other))));
+                            } else {
+                                player.sendMessage(Message.PLAYER_OFFLINE);
+                            }
+                        } else {
+                            player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
+                                    Message.convertTime(PvPHandler.getPlayerTime(player))));
+                        }
+                    } else {
+                        player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
+                                Message.convertTime(PvPHandler.getPlayerTime(player))));
+                    }
                     break;
                 case "tchc":
                     if (player.hasPermission("tchc.admin")) {
