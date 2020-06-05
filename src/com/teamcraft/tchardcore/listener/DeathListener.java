@@ -2,6 +2,7 @@ package com.teamcraft.tchardcore.listener;
 
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
+import com.teamcraft.tchardcore.handler.DeathListHandler;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,12 +23,7 @@ public class DeathListener implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         Player player = e.getEntity();
-        YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
-        if (players.getConfigurationSection("alive") != null &&
-                players.getConfigurationSection("alive").getKeys(false).contains(player.getUniqueId().toString())) {
-            players.set("alive." + player.getUniqueId(), null);
-        }
-        players.set("dead." + player.getUniqueId(), player.getName());
+        DeathListHandler.addDeath(player);
     }
     
     /**
@@ -39,12 +35,7 @@ public class DeathListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
-        if (players.getConfigurationSection("dead") == null ||
-                !players.getConfigurationSection("dead").getKeys(false).contains(player.getUniqueId().toString())) {
-            players.set("alive." + player.getUniqueId(), player.getName());
-        }
-        players.set("all." + player.getUniqueId(), player.getName());
+        DeathListHandler.initPlayer(player);
     }
     
 }
