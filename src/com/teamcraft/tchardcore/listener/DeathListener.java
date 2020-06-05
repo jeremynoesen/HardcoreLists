@@ -1,10 +1,6 @@
 package com.teamcraft.tchardcore.listener;
 
-import com.teamcraft.tchardcore.config.ConfigType;
-import com.teamcraft.tchardcore.config.Configs;
-import com.teamcraft.tchardcore.handler.DeathListHandler;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
+import com.teamcraft.tchardcore.handler.ListHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -22,7 +18,7 @@ public class DeathListener implements Listener {
      */
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        DeathListHandler.addDeath(e.getEntity());
+        ListHandler.addDeath(e.getEntity());
     }
     
     /**
@@ -33,7 +29,7 @@ public class DeathListener implements Listener {
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        DeathListHandler.initPlayer(e.getPlayer());
+        ListHandler.initPlayer(e.getPlayer());
     }
     
 }
