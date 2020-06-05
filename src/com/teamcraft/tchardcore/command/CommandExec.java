@@ -3,6 +3,8 @@ package com.teamcraft.tchardcore.command;
 import com.teamcraft.tchardcore.Message;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
+import com.teamcraft.tchardcore.handler.ListHandler;
+import com.teamcraft.tchardcore.handler.ListType;
 import com.teamcraft.tchardcore.handler.PvPHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -66,12 +68,45 @@ public class CommandExec implements CommandExecutor {
                                 case "help":
                                     player.sendMessage(Message.HELP);
                                     break;
-                                case "settime":
-                                    if(args[1] != null) {
-                                        Configs.getConfig(ConfigType.TIME).getConfig()
-                                                .set("pvp-countdown-seconds", Integer.valueOf(args[1]));
-                                        player.sendMessage(Message.SET_TIME.replace("$TIME$",
-                                                Message.convertTime(Integer.valueOf(args[1]))));
+                                case "timer":
+                                    if (args[1] != null && args[1].equalsIgnoreCase("set") && args[2] != null) {
+                                        try {
+                                            Configs.getConfig(ConfigType.TIME).getConfig()
+                                                    .set("pvp-countdown-seconds", Integer.valueOf(args[2]));
+                                            player.sendMessage(Message.SET_TIME.replace("$TIME$",
+                                                    Message.convertTime(Integer.valueOf(args[2]))));
+                                        } catch (Exception e) {
+                                            player.sendMessage(Message.UNKNOWN_COMMAND);
+                                        }
+                                    } else {
+                                        player.sendMessage(Message.UNKNOWN_COMMAND);
+                                    }
+                                    break;
+                                case "list":
+                                    if (args[1] != null && args[2] != null) {
+                                        try {
+                                            switch (args[1].toLowerCase()) {
+                                                case "dead":
+                                                    player.sendMessage(Message.DEAD_LIST_TITLE);
+                                                    player.sendMessage(ListHandler.listPlayers(
+                                                            Integer.valueOf(args[2]), ListType.DEAD));
+                                                    break;
+                                                case "alive":
+                                                    player.sendMessage(Message.ALIVE_LIST_TITLE);
+                                                    player.sendMessage(ListHandler.listPlayers(
+                                                            Integer.valueOf(args[2]), ListType.ALIVE));
+                                                    break;
+                                                case "all":
+                                                    player.sendMessage(Message.ALL_LIST_TITLE);
+                                                    player.sendMessage(ListHandler.listPlayers(
+                                                            Integer.valueOf(args[2]), ListType.ALL));
+                                                    break;
+                                                default:
+                                                    player.sendMessage(Message.UNKNOWN_COMMAND);
+                                            }
+                                        } catch (Exception e) {
+                                            player.sendMessage(Message.UNKNOWN_COMMAND);
+                                        }
                                     } else {
                                         player.sendMessage(Message.UNKNOWN_COMMAND);
                                     }
