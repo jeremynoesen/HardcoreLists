@@ -1,5 +1,6 @@
 package com.teamcraft.tchardcore.handler;
 
+import com.teamcraft.tchardcore.Message;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -76,7 +77,9 @@ public class ListHandler {
         for (int i = 0; i < Math.min(LENGTH, list.size()); i++) {
             int shift = i + (LENGTH * (page - 1));
             String name = list.get(shift);
-            stringList[i] = (shift + 1) + ": " + name;
+            stringList[i] = Message.LIST_FORMAT
+                    .replace("$POS$", Integer.toString(shift + 1))
+                    .replace("$PLAYER$", name);
         }
         return stringList;
     }
