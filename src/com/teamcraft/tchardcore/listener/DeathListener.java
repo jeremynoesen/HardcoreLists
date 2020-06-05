@@ -22,8 +22,7 @@ public class DeathListener implements Listener {
      */
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        Player player = e.getEntity();
-        DeathListHandler.addDeath(player);
+        DeathListHandler.addDeath(e.getEntity());
     }
     
     /**
@@ -34,8 +33,7 @@ public class DeathListener implements Listener {
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        Player player = e.getPlayer();
-        DeathListHandler.initPlayer(player);
+        DeathListHandler.initPlayer(e.getPlayer());
     }
     
 }
