@@ -1,6 +1,5 @@
 package com.teamcraft.tchardcore.listener;
 
-import com.teamcraft.tchardcore.Message;
 import com.teamcraft.tchardcore.handler.PvPHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -21,22 +20,17 @@ public class PVPListener implements Listener {
      * @param e
      */
     @EventHandler
-    public void onPvP(EntityDamageByEntityEvent e){
-        if(e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
+    public void onPvP(EntityDamageByEntityEvent e) {
+        if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
             Player damager = (Player) e.getDamager();
             Player player = (Player) e.getEntity();
-            if(PvPHandler.getPvPTimes().containsKey(player) || PvPHandler.getPvPTimes().containsKey(damager)) {
-                e.setCancelled(true);
-                damager.sendMessage(Message.CANT_HURT);
-            }
-        } else if(e.getDamager() instanceof Projectile && e.getEntity() instanceof Player) {
+            PvPHandler.checkPvP(player, damager, e);
+        } else if (e.getDamager() instanceof Projectile &&
+                ((Projectile) e.getDamager()).getShooter() instanceof Player &&
+                e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
-            Projectile damager = (Projectile) e.getDamager();
-            if(PvPHandler.getPvPTimes().containsKey(player) || (damager.getShooter() instanceof Player &&
-                    PvPHandler.getPvPTimes().containsKey((Player) damager.getShooter()))) {
-                e.setCancelled(true);
-                ((Player) damager.getShooter()).sendMessage(Message.CANT_HURT);
-            }
+            Player damager = (Player) ((Projectile) e.getDamager()).getShooter();
+            PvPHandler.checkPvP(player, damager, e);
         }
     }
     
@@ -47,8 +41,7 @@ public class PVPListener implements Listener {
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        Player player = e.getPlayer();
-        PvPHandler.initPlayer(player);
+        PvPHandler.initPlayer(e.getPlayer());
     }
     
     /**
@@ -58,8 +51,7 @@ public class PVPListener implements Listener {
      */
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
-        Player player = e.getPlayer();
-        PvPHandler.savePlayer(player);
+        PvPHandler.savePlayer(e.getPlayer());
     }
-
+    
 }
