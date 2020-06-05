@@ -22,6 +22,10 @@ public class Message {
     public static String RELOAD;
     public static String SET_TIME;
     public static String PLAYER_OFFLINE;
+    public static String LIST_FORMAT;
+    public static String DEAD_LIST_TITLE;
+    public static String ALIVE_LIST_TITLE;
+    public static String ALL_LIST_TITLE;
     public static String[] HELP;
     
     /**
@@ -38,7 +42,11 @@ public class Message {
         RELOAD = PREFIX + format(messageConfig.getConfig().getString("RELOAD"));
         SET_TIME = PREFIX + format(messageConfig.getConfig().getString("SET_TIME"));
         PLAYER_OFFLINE = PREFIX + format(messageConfig.getConfig().getString("PLAYER_OFFLINE"));
-    
+        LIST_FORMAT = PREFIX + format(messageConfig.getConfig().getString("LIST_FORMAT"));
+        DEAD_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("DEAD_LIST_TITLE"));
+        ALIVE_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALIVE_LIST_TITLE"));
+        ALL_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALL_LIST_TITLE"));
+        
         HELP = new String[]{
                 "",
                 ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "-------------[" + PREFIX +
@@ -70,6 +78,6 @@ public class Message {
      * @return string formatted as 0m 0s
      */
     public static String convertTime(int seconds) {
-        return (seconds/60) + "m " + (seconds%60) + "s";
+        return (seconds / 60) + "m " + (seconds % 60) + "s";
     }
 }
