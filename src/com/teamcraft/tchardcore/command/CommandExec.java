@@ -67,10 +67,14 @@ public class CommandExec implements CommandExecutor {
                                     player.sendMessage(Message.HELP);
                                     break;
                                 case "settime":
-                                    Configs.getConfig(ConfigType.TIME).getConfig()
-                                            .set("pvp-countdown-seconds", Integer.valueOf(args[1]));
-                                    player.sendMessage(Message.SET_TIME.replace("$TIME$",
-                                            Message.convertTime(Integer.valueOf(args[1]))));
+                                    if(args[1] != null) {
+                                        Configs.getConfig(ConfigType.TIME).getConfig()
+                                                .set("pvp-countdown-seconds", Integer.valueOf(args[1]));
+                                        player.sendMessage(Message.SET_TIME.replace("$TIME$",
+                                                Message.convertTime(Integer.valueOf(args[1]))));
+                                    } else {
+                                        player.sendMessage(Message.UNKNOWN_COMMAND);
+                                    }
                                     break;
                                 default:
                                     player.sendMessage(Message.UNKNOWN_COMMAND);
