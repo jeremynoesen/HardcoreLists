@@ -75,7 +75,7 @@ public class CommandExec implements CommandExecutor {
                                     player.sendMessage(Message.HELP);
                                     break;
                                 case "timer":
-                                    if (args[1] != null && args[1].equalsIgnoreCase("set") && args[2] != null) {
+                                    if (args.length > 2 && args[1] != null && args[1].equalsIgnoreCase("set") && args[2] != null) {
                                         try {
                                             Configs.getConfig(ConfigType.TIME).getConfig()
                                                     .set("pvp-countdown-seconds", Integer.valueOf(args[2]));
@@ -89,23 +89,25 @@ public class CommandExec implements CommandExecutor {
                                     }
                                     break;
                                 case "list":
-                                    if (args[1] != null && args[2] != null) {
+                                    if (args.length > 1 && args[1] != null) {
                                         try {
+                                            int page = 1;
+                                            if (args.length > 2 && args[2] != null) page = Integer.parseInt(args[2]);
                                             switch (args[1].toLowerCase()) {
                                                 case "dead":
                                                     player.sendMessage(Message.DEAD_LIST_TITLE);
                                                     player.sendMessage(ListHandler.listPlayers(
-                                                            Integer.valueOf(args[2]), ListType.DEAD));
+                                                            page, ListType.DEAD));
                                                     break;
                                                 case "alive":
                                                     player.sendMessage(Message.ALIVE_LIST_TITLE);
                                                     player.sendMessage(ListHandler.listPlayers(
-                                                            Integer.valueOf(args[2]), ListType.ALIVE));
+                                                            page, ListType.ALIVE));
                                                     break;
                                                 case "all":
                                                     player.sendMessage(Message.ALL_LIST_TITLE);
                                                     player.sendMessage(ListHandler.listPlayers(
-                                                            Integer.valueOf(args[2]), ListType.ALL));
+                                                            page, ListType.ALL));
                                                     break;
                                                 default:
                                                     player.sendMessage(Message.UNKNOWN_COMMAND);
@@ -137,16 +139,16 @@ public class CommandExec implements CommandExecutor {
             } else {
                 PvPHandler.getPvPTimes().clear();
                 Config players = Configs.getConfig(ConfigType.PLAYERS);
-                for(String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
+                for (String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
                     players.getConfig().set("dead." + key, null);
                 }
-                for(String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
+                for (String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
                     players.getConfig().set("alivw." + key, null);
                 }
-                for(String key : players.getConfig().getConfigurationSection("all").getKeys(false)) {
+                for (String key : players.getConfig().getConfigurationSection("all").getKeys(false)) {
                     players.getConfig().set("all." + key, null);
                 }
-                for(String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
+                for (String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
                     players.getConfig().set("pvp-times." + key, null);
                 }
                 console.sendMessage(Message.RESET);
