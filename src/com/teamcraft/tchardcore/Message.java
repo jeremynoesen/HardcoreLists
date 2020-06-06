@@ -26,6 +26,8 @@ public class Message {
     public static String DEAD_LIST_TITLE;
     public static String ALIVE_LIST_TITLE;
     public static String ALL_LIST_TITLE;
+    public static String RESET;
+    public static String CANT_RESET;
     public static String[] HELP;
     
     /**
@@ -46,7 +48,9 @@ public class Message {
         DEAD_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("DEAD_LIST_TITLE"));
         ALIVE_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALIVE_LIST_TITLE"));
         ALL_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALL_LIST_TITLE"));
-        
+        RESET = PREFIX + format(messageConfig.getConfig().getString("RESET"));
+        CANT_RESET = PREFIX + format(messageConfig.getConfig().getString("CANT_RESET"));
+    
         HELP = new String[]{
                 "",
                 ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "-------------[" + PREFIX +
@@ -55,7 +59,9 @@ public class Message {
                 ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View time remaining on your pvp timer",
                 ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View time remaining on an online player's pvp timer",
                 ChatColor.GRAY + "/tchc reload" + ChatColor.WHITE + ": Reload all config and data files for the plugin",
-                ChatColor.GRAY + "/tchc settime <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
+                ChatColor.GRAY + "/tchc timer set <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
+                ChatColor.GRAY + "/tchc list dead/alive/all <page>" + ChatColor.WHITE + ": Get players in a list by page",
+                ChatColor.GRAY + "/tchc reset" + ChatColor.WHITE + ": Reset data, can only be run by console when nobody is online",
                 ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------------------------------",
                 ""
         };
