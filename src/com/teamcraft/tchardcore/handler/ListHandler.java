@@ -73,6 +73,8 @@ public class ListHandler {
      */
     private static String[] getListPage(int page, ArrayList<String> list, ListType type) {
         int LENGTH = 10;
+        int actualPages = (list.size() / LENGTH) + (list.size() % LENGTH > 0 ? 1 : 0);
+        if(page > actualPages) page = actualPages;
         String[] stringList = new String[10];
         for (int i = 0; i < Math.min(LENGTH, list.size()); i++) {
             int shift = i + (LENGTH * (page - 1));
