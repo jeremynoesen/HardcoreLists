@@ -44,13 +44,13 @@ public class CommandTabComplete implements TabCompleter {
                     if (args[0].equalsIgnoreCase("timer")) {
                         list.add("set");
                     } else if (args[0].equalsIgnoreCase("list")) {
-                        if (args[0].toLowerCase().startsWith("d")) list.add("dead");
-                        else if (args[0].toLowerCase().startsWith("ali")) list.add("alive");
-                        else if (args[0].toLowerCase().startsWith("all")) list.add("all");
-                        else if (args[0].toLowerCase().startsWith("a")) {
+                        if (args[1].toLowerCase().startsWith("d")) list.add("dead");
+                        else if (args[1].toLowerCase().startsWith("ali")) list.add("alive");
+                        else if (args[1].toLowerCase().startsWith("all")) list.add("all");
+                        else if (args[1].toLowerCase().startsWith("a")) {
                             list.add("alive");
                             list.add("all");
-                        } else if (args[0].toLowerCase().startsWith("")) {
+                        } else if (args[1].toLowerCase().startsWith("")) {
                             list.add("all");
                             list.add("alive");
                             list.add("dead");

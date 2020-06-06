@@ -1,4 +1,4 @@
-PREFIX: "&8[&5H&dC&8] "
+PREFIX: "&8&l[&5&lH&d&lC&8&l] &r"
 PVP_ENABLED: "&7You can now PvP."
 PVP_DISABLED: "&7You can PvP in &f$TIME$&7."
 CANT_HURT: "&7This player cannot PvP yet!"
