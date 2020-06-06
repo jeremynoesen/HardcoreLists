@@ -44,7 +44,7 @@ public class Message {
         RELOAD = PREFIX + format(messageConfig.getConfig().getString("RELOAD"));
         SET_TIME = PREFIX + format(messageConfig.getConfig().getString("SET_TIME"));
         PLAYER_OFFLINE = PREFIX + format(messageConfig.getConfig().getString("PLAYER_OFFLINE"));
-        LIST_FORMAT = PREFIX + format(messageConfig.getConfig().getString("LIST_FORMAT"));
+        LIST_FORMAT =  format(messageConfig.getConfig().getString("LIST_FORMAT"));
         DEAD_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("DEAD_LIST_TITLE"));
         ALIVE_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALIVE_LIST_TITLE"));
         ALL_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALL_LIST_TITLE"));

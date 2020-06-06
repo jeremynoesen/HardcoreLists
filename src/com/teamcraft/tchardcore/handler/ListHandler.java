@@ -54,11 +54,11 @@ public class ListHandler {
     public static String[] listPlayers(int page, ListType type) {
         switch (type) {
             case DEAD:
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("dead").getKeys(false)));
+                return getListPage(page, new ArrayList<>(players.getConfigurationSection("dead").getKeys(false)), type);
             case ALIVE:
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("alive").getKeys(false)));
+                return getListPage(page, new ArrayList<>(players.getConfigurationSection("alive").getKeys(false)), type);
             case ALL:
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("all").getKeys(false)));
+                return getListPage(page, new ArrayList<>(players.getConfigurationSection("all").getKeys(false)), type);
             default:
                 return null;
         }
@@ -71,12 +71,12 @@ public class ListHandler {
      * @param list list to get page pf
      * @return string array formatted with the list of names
      */
-    private static String[] getListPage(int page, ArrayList<String> list) {
+    private static String[] getListPage(int page, ArrayList<String> list, ListType type) {
         int LENGTH = 10;
         String[] stringList = new String[10];
         for (int i = 0; i < Math.min(LENGTH, list.size()); i++) {
             int shift = i + (LENGTH * (page - 1));
-            String name = list.get(shift);
+            String name = players.getString(type.toString().toLowerCase() + "." + list.get(shift));
             stringList[i] = Message.LIST_FORMAT
                     .replace("$POS$", Integer.toString(shift + 1))
                     .replace("$PLAYER$", name);
