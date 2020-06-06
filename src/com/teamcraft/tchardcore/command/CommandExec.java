@@ -1,6 +1,8 @@
 package com.teamcraft.tchardcore.command;
 
 import com.teamcraft.tchardcore.Message;
+import com.teamcraft.tchardcore.TCHardcore;
+import com.teamcraft.tchardcore.config.Config;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
 import com.teamcraft.tchardcore.handler.ListHandler;
@@ -10,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -64,6 +67,9 @@ public class CommandExec implements CommandExecutor {
                                     Configs.getConfig(ConfigType.MESSAGE).reloadConfig();
                                     Configs.getConfig(ConfigType.PLAYERS).reloadConfig();
                                     player.sendMessage(Message.RELOAD);
+                                    break;
+                                case "reset":
+                                    player.sendMessage(Message.CANT_RESET);
                                     break;
                                 case "help":
                                     player.sendMessage(Message.HELP);
@@ -123,6 +129,27 @@ public class CommandExec implements CommandExecutor {
                     break;
                 default:
                     player.sendMessage(Message.UNKNOWN_COMMAND);
+            }
+        } else if (commandSender instanceof ConsoleCommandSender) {
+            ConsoleCommandSender console = (ConsoleCommandSender) commandSender;
+            if (Bukkit.getOnlinePlayers().size() > 0) {
+                console.sendMessage(Message.CANT_RESET);
+            } else {
+                PvPHandler.getPvPTimes().clear();
+                Config players = Configs.getConfig(ConfigType.PLAYERS);
+                for(String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
+                    players.getConfig().set("dead." + key, null);
+                }
+                for(String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
+                    players.getConfig().set("alivw." + key, null);
+                }
+                for(String key : players.getConfig().getConfigurationSection("all").getKeys(false)) {
+                    players.getConfig().set("all." + key, null);
+                }
+                for(String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
+                    players.getConfig().set("pvp-times." + key, null);
+                }
+                console.sendMessage(Message.RESET);
             }
         }
         return true;
