@@ -1,7 +1,6 @@
 package com.teamcraft.tchardcore.command;
 
 import com.teamcraft.tchardcore.Message;
-import com.teamcraft.tchardcore.TCHardcore;
 import com.teamcraft.tchardcore.config.Config;
 import com.teamcraft.tchardcore.config.ConfigType;
 import com.teamcraft.tchardcore.config.Configs;
@@ -17,6 +16,8 @@ import org.bukkit.entity.Player;
 
 /**
  * command executor for the plugin's commands
+ *
+ * @author JNDev (Jeremaster101)
  */
 public class CommandExec implements CommandExecutor {
     

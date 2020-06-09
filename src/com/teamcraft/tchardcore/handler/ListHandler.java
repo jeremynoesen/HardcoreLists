@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 /**
  * class to handle death list data
+ *
+ * @author JNDev (Jeremaster101)
  */
 public class ListHandler {
     

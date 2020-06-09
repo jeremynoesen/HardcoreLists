@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * tab completer for the tchc command
+ *
+ * @author JNDev (Jeremaster101)
  */
 public class CommandTabComplete implements TabCompleter {
     

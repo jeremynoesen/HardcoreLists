@@ -13,6 +13,8 @@ import java.util.logging.Level;
 
 /**
  * class used to manage all config files in plugin
+ *
+ * @author JNDev (Jeremaster101)
  */
 public class Config {
     

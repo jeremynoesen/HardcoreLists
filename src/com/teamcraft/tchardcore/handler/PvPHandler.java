@@ -11,6 +11,8 @@ import java.util.HashMap;
 
 /**
  * methods to tick player times and load the last known times from file
+ *
+ * @author JNDev (Jeremaster101)
  */
 public class PvPHandler {
     
