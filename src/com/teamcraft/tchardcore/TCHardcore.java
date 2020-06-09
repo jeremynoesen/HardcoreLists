@@ -14,6 +14,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * main class of plugin
+ *
+ * @author JNDev (Jeremaster101)
  */
 public class TCHardcore extends JavaPlugin {
     

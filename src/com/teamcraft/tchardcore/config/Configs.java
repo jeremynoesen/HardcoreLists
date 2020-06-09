@@ -2,6 +2,8 @@ package com.teamcraft.tchardcore.config;
 
 /**
  * initialize all configs
+ *
+ * @author JNDev (Jeremaster101)
  */
 public class Configs {
     

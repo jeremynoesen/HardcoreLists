@@ -11,6 +11,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
  * listener class related to the anti-pvp mechanic
+ *
+ * @author JNDev (Jeremaster101)
  */
 public class PVPListener implements Listener {
     
