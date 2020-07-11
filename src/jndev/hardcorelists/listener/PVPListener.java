@@ -1,6 +1,6 @@
-package com.teamcraft.tchardcore.listener;
+package jndev.hardcorelists.listener;
 
-import com.teamcraft.tchardcore.handler.PvPHandler;
+import jndev.hardcorelists.handler.PvPHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;

@@ -1,12 +1,12 @@
-package com.teamcraft.tchardcore.command;
+package jndev.hardcorelists.command;
 
-import com.teamcraft.tchardcore.Message;
-import com.teamcraft.tchardcore.config.Config;
-import com.teamcraft.tchardcore.config.ConfigType;
-import com.teamcraft.tchardcore.config.Configs;
-import com.teamcraft.tchardcore.handler.ListHandler;
-import com.teamcraft.tchardcore.handler.ListType;
-import com.teamcraft.tchardcore.handler.PvPHandler;
+import jndev.hardcorelists.Message;
+import jndev.hardcorelists.config.Config;
+import jndev.hardcorelists.config.ConfigType;
+import jndev.hardcorelists.config.Configs;
+import jndev.hardcorelists.handler.ListHandler;
+import jndev.hardcorelists.handler.ListType;
+import jndev.hardcorelists.handler.PvPHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,4 +1,4 @@
-package com.teamcraft.tchardcore.command;
+package jndev.hardcorelists.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

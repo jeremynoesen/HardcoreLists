@@ -1,8 +1,8 @@
-package com.teamcraft.tchardcore.handler;
+package jndev.hardcorelists.handler;
 
-import com.teamcraft.tchardcore.Message;
-import com.teamcraft.tchardcore.config.ConfigType;
-import com.teamcraft.tchardcore.config.Configs;
+import jndev.hardcorelists.Message;
+import jndev.hardcorelists.config.ConfigType;
+import jndev.hardcorelists.config.Configs;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 

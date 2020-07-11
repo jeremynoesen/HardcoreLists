@@ -1,12 +1,12 @@
-package com.teamcraft.tchardcore;
+package jndev.hardcorelists;
 
-import com.teamcraft.tchardcore.command.CommandExec;
-import com.teamcraft.tchardcore.command.CommandTabComplete;
-import com.teamcraft.tchardcore.config.ConfigType;
-import com.teamcraft.tchardcore.config.Configs;
-import com.teamcraft.tchardcore.handler.PvPHandler;
-import com.teamcraft.tchardcore.listener.DeathListener;
-import com.teamcraft.tchardcore.listener.PVPListener;
+import jndev.hardcorelists.command.CommandExec;
+import jndev.hardcorelists.command.CommandTabComplete;
+import jndev.hardcorelists.config.ConfigType;
+import jndev.hardcorelists.config.Configs;
+import jndev.hardcorelists.handler.PvPHandler;
+import jndev.hardcorelists.listener.DeathListener;
+import jndev.hardcorelists.listener.PVPListener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,12 +17,12 @@ import org.bukkit.scheduler.BukkitRunnable;
  *
  * @author JNDev (Jeremaster101)
  */
-public class TCHardcore extends JavaPlugin {
+public class HardcoreLists extends JavaPlugin {
     
     /**
      * instance of plugin itself
      */
-    private static TCHardcore plugin;
+    private static HardcoreLists plugin;
     
     /**
      * initialize all files, commands, listeners, and start player timer ticker
@@ -68,7 +68,7 @@ public class TCHardcore extends JavaPlugin {
      *
      * @return instance of plugin
      */
-    public static TCHardcore getInstance() {
+    public static HardcoreLists getInstance() {
         return plugin;
     }
 }

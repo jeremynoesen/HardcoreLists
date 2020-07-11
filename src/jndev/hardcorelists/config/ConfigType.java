@@ -1,6 +1,6 @@
-package com.teamcraft.tchardcore.config;
+package jndev.hardcorelists.config;
 
-import com.teamcraft.tchardcore.TCHardcore;
+import jndev.hardcorelists.HardcoreLists;
 
 import java.io.File;
 import java.io.InputStream;
@@ -23,20 +23,20 @@ public enum ConfigType {
      * @return config file of the matching file name
      */
     public File getFile() {
-        return new File(TCHardcore.getInstance().getDataFolder(), fileName);
+        return new File(HardcoreLists.getInstance().getDataFolder(), fileName);
     }
     
     /**
      * @return input stream of resource from inside plugin jar
      */
     public InputStream getResource() {
-        return TCHardcore.getInstance().getResource(fileName);
+        return HardcoreLists.getInstance().getResource(fileName);
     }
     
     /**
      * save resource from plugin jar to plugin folder
      */
     public void saveResource() {
-        TCHardcore.getInstance().saveResource(fileName, false);
+        HardcoreLists.getInstance().saveResource(fileName, false);
     }
 }

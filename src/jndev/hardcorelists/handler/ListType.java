@@ -1,4 +1,4 @@
-package com.teamcraft.tchardcore.handler;
+package jndev.hardcorelists.handler;
 
 /**
  * list types for the player lists
