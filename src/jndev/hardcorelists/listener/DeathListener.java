@@ -1,6 +1,6 @@
-package com.teamcraft.tchardcore.listener;
+package jndev.hardcorelists.listener;
 
-import com.teamcraft.tchardcore.handler.ListHandler;
+import jndev.hardcorelists.handler.ListHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;

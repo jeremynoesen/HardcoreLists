@@ -1,7 +1,7 @@
-package com.teamcraft.tchardcore.config;
+package jndev.hardcorelists.config;
 
-import com.teamcraft.tchardcore.Message;
-import com.teamcraft.tchardcore.TCHardcore;
+import jndev.hardcorelists.Message;
+import jndev.hardcorelists.HardcoreLists;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -66,7 +66,7 @@ public class Config {
         try {
             getConfig().save(configFile);
         } catch (IOException ex) {
-            TCHardcore.getInstance().getLogger().log(Level.SEVERE, "A config file failed to save!", ex);
+            HardcoreLists.getInstance().getLogger().log(Level.SEVERE, "A config file failed to save!", ex);
         }
     }
     

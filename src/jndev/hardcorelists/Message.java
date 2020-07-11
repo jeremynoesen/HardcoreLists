@@ -1,8 +1,8 @@
-package com.teamcraft.tchardcore;
+package jndev.hardcorelists;
 
-import com.teamcraft.tchardcore.config.Config;
-import com.teamcraft.tchardcore.config.ConfigType;
-import com.teamcraft.tchardcore.config.Configs;
+import jndev.hardcorelists.config.Config;
+import jndev.hardcorelists.config.ConfigType;
+import jndev.hardcorelists.config.Configs;
 import org.bukkit.ChatColor;
 
 /**

@@ -1,4 +1,4 @@
-package com.teamcraft.tchardcore.config;
+package jndev.hardcorelists.config;
 
 /**
  * initialize all configs
