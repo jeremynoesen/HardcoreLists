@@ -37,11 +37,11 @@ public class HardcoreLists extends JavaPlugin {
         PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new DeathListener(), this);
         pm.registerEvents(new PVPListener(), this);
-        pm.addPermission(new Permission("tchc.admin"));
+        pm.addPermission(new Permission("hardcorelists.admin"));
         CommandExec commandExec = new CommandExec();
-        getCommand("tchc").setExecutor(commandExec);
+        getCommand("hardcorelists").setExecutor(commandExec);
         getCommand("pvptime").setExecutor(commandExec);
-        getCommand("tchc").setTabCompleter(new CommandTabComplete());
+        getCommand("hardcorelists").setTabCompleter(new CommandTabComplete());
         
         // tick player timers every second
         new BukkitRunnable() {
