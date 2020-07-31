@@ -37,7 +37,7 @@ public class CommandExec implements CommandExecutor {
             Player player = (Player) commandSender;
             switch (label.toLowerCase()) {
                 case "pvptime":
-                    if (player.hasPermission("tchc.admin")) {
+                    if (player.hasPermission("hardcorelists.admin")) {
                         if (args.length > 0) {
                             try {
                                 Player other = Bukkit.getPlayer(args[0]);
@@ -59,8 +59,8 @@ public class CommandExec implements CommandExecutor {
                                 .replace("$PLAYER$", "You"));
                     }
                     break;
-                case "tchc":
-                    if (player.hasPermission("tchc.admin")) {
+                case "hardcorelists":
+                    if (player.hasPermission("hardcorelists.admin")) {
                         if (args.length > 0) {
                             switch (args[0].toLowerCase()) {
                                 case "reload":

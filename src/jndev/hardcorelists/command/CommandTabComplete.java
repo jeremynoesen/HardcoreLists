@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * tab completer for the tchc command
+ * tab completer for the hardcorelists command
  *
  * @author JNDev (Jeremaster101)
  */
@@ -30,7 +30,7 @@ public class CommandTabComplete implements TabCompleter {
         
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (label.equalsIgnoreCase("tchc") && player.hasPermission("tchc.admin")) {
+            if (label.equalsIgnoreCase("hardcorelists") && player.hasPermission("hardcorelists.admin")) {
                 if (args.length == 1) {
                     if (args[0].toLowerCase().startsWith("h")) list.add("help");
                     else if (args[0].toLowerCase().startsWith("l")) list.add("list");

@@ -60,10 +60,10 @@ public class Message {
                         + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]-------------",
                 ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View time remaining on your pvp timer",
                 ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View time remaining on an online player's pvp timer",
-                ChatColor.GRAY + "/tchc reload" + ChatColor.WHITE + ": Reload all config and data files for the plugin",
-                ChatColor.GRAY + "/tchc timer set <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
-                ChatColor.GRAY + "/tchc list dead/alive/all <page>" + ChatColor.WHITE + ": Get players in a list by page",
-                ChatColor.GRAY + "/tchc reset" + ChatColor.WHITE + ": Reset data, can only be run by console when nobody is online",
+                ChatColor.GRAY + "/hardcorelists reload" + ChatColor.WHITE + ": Reload all config and data files for the plugin",
+                ChatColor.GRAY + "/hardcorelists timer set <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
+                ChatColor.GRAY + "/hardcorelists list dead/alive/all <page>" + ChatColor.WHITE + ": Get players in a list by page",
+                ChatColor.GRAY + "/hardcorelists reset" + ChatColor.WHITE + ": Reset data, can only be run by console when nobody is online",
                 ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------------------------------",
                 ""
         };
