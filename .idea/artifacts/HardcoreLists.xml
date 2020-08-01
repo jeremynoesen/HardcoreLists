@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="HardcoreLists">
-    <output-path>$PROJECT_DIR$/out/artifacts/HardcoreLists</output-path>
-    <root id="archive" name="HardcoreLists.jar">
-      <element id="module-output" name="HardcoreLists" />
-    </root>
-  </artifact>
-</component>
