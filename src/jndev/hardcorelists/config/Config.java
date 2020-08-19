@@ -1,7 +1,7 @@
 package jndev.hardcorelists.config;
 
-import jndev.hardcorelists.Message;
 import jndev.hardcorelists.HardcoreLists;
+import jndev.hardcorelists.Message;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -42,11 +42,12 @@ public class Config {
         YMLConfig.options().copyDefaults(true);
         saveConfig();
         
-        if(configType == ConfigType.MESSAGE) Message.reloadMessages();
+        if (configType == ConfigType.MESSAGE) Message.reloadMessages();
     }
     
     /**
      * reloads config if YMLConfig is null
+     *
      * @return YMLConfig YamlConfiguration
      */
     public YamlConfiguration getConfig() {
