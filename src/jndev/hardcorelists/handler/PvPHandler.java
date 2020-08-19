@@ -24,7 +24,7 @@ public class PvPHandler {
     /**
      * reference to death list file
      */
-    private static YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
+    private static final YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
     
     /**
      * get the hashmap of pvp times for players

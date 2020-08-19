@@ -36,7 +36,7 @@ public class CommandTabComplete implements TabCompleter {
                     else if (args[0].toLowerCase().startsWith("l")) list.add("list");
                     else if (args[0].toLowerCase().startsWith("r")) list.add("reload");
                     else if (args[0].toLowerCase().startsWith("t")) list.add("timer");
-                    else if (args[0].toLowerCase().startsWith("")) {
+                    else {
                         list.add("help");
                         list.add("list");
                         list.add("reload");
@@ -52,7 +52,7 @@ public class CommandTabComplete implements TabCompleter {
                         else if (args[1].toLowerCase().startsWith("a")) {
                             list.add("alive");
                             list.add("all");
-                        } else if (args[1].toLowerCase().startsWith("")) {
+                        } else {
                             list.add("all");
                             list.add("alive");
                             list.add("dead");
