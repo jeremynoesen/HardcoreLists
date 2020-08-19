@@ -7,8 +7,19 @@ package jndev.hardcorelists.config;
  */
 public class Configs {
     
+    /**
+     * player list file
+     */
     private static final Config players = new Config(ConfigType.PLAYERS);
+    
+    /**
+     * message config file
+     */
     private static final Config message = new Config(ConfigType.MESSAGE);
+    
+    /**
+     * time config file
+     */
     private static final Config time = new Config(ConfigType.TIME);
     
     /**
@@ -28,7 +39,6 @@ public class Configs {
                 return time;
             
         }
-        
         return null;
     }
     

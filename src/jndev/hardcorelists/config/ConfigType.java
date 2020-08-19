@@ -13,8 +13,14 @@ import java.io.InputStream;
 public enum ConfigType {
     TIME("time.yml"), MESSAGE("messages.yml"), PLAYERS("players.yml");
     
+    /**
+     * name of file
+     */
     public String fileName;
     
+    /**
+     * @param file file name
+     */
     ConfigType(String file) {
         this.fileName = file;
     }
