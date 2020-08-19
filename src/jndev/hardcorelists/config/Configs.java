@@ -23,7 +23,7 @@ public class Configs {
             
             case PLAYERS:
                 return players;
-                
+            
             case TIME:
                 return time;
             
