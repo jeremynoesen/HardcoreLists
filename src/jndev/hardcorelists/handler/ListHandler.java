@@ -18,7 +18,7 @@ public class ListHandler {
     /**
      * reference to player list file
      */
-    private static YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
+    private static final YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
     
     /**
      * add player tyo list of all players, as well as the alive list if they are not in the dead list
