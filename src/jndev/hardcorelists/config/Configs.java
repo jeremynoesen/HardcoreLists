@@ -3,7 +3,7 @@ package jndev.hardcorelists.config;
 /**
  * initialize all configs
  *
- * @author JNDev (Jeremaster101)
+ * @author Jeremy Noesen
  */
 public class Configs {
     

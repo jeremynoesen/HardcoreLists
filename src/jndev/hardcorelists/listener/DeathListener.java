@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 /**
  * listener class related to the death and player lists for the list file
  *
- * @author JNDev (Jeremaster101)
+ * @author Jeremy Noesen
  */
 public class DeathListener implements Listener {
     

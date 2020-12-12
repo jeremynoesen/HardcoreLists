@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * tab completer for the hardcorelists command
  *
- * @author JNDev (Jeremaster101)
+ * @author Jeremy Noesen
  */
 public class CommandTabComplete implements TabCompleter {
     

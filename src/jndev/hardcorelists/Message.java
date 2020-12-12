@@ -8,7 +8,7 @@ import org.bukkit.ChatColor;
 /**
  * All messages used within the plugin
  *
- * @author JNDev (Jeremaster101)
+ * @author Jeremy Noesen
  */
 public class Message {
     
