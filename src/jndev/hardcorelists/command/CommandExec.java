@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 /**
  * command executor for the plugin's commands
  *
- * @author JNDev (Jeremaster101)
+ * @author Jeremy Noesen
  */
 public class CommandExec implements CommandExecutor {
     

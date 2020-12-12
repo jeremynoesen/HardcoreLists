@@ -3,7 +3,7 @@ package jndev.hardcorelists.handler;
 /**
  * list types for the player lists
  *
- * @author JNDev (Jeremaster101)
+ * @author Jeremy Noesen
  */
 public enum ListType {
     DEAD, ALIVE, ALL

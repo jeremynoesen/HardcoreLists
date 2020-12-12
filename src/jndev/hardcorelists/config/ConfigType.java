@@ -8,7 +8,7 @@ import java.io.InputStream;
 /**
  * enum to make getting separate configs easier
  *
- * @author JNDev (Jeremaster101)
+ * @author Jeremy Noesen
  */
 public enum ConfigType {
     TIME("time.yml"), MESSAGE("messages.yml"), PLAYERS("players.yml");

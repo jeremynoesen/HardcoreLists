@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * class to handle death list data
  *
- * @author JNDev (Jeremaster101)
+ * @author Jeremy Noesen
  */
 public class ListHandler {
     
