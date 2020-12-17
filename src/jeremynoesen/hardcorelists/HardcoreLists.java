@@ -1,12 +1,12 @@
-package jndev.hardcorelists;
+package jeremynoesen.hardcorelists;
 
-import jndev.hardcorelists.command.CommandExec;
-import jndev.hardcorelists.command.CommandTabComplete;
-import jndev.hardcorelists.config.ConfigType;
-import jndev.hardcorelists.config.Configs;
-import jndev.hardcorelists.handler.PvPHandler;
-import jndev.hardcorelists.listener.DeathListener;
-import jndev.hardcorelists.listener.PVPListener;
+import jeremynoesen.hardcorelists.command.CommandExec;
+import jeremynoesen.hardcorelists.command.CommandTabComplete;
+import jeremynoesen.hardcorelists.config.ConfigType;
+import jeremynoesen.hardcorelists.config.Configs;
+import jeremynoesen.hardcorelists.handler.PvPHandler;
+import jeremynoesen.hardcorelists.listener.DeathListener;
+import jeremynoesen.hardcorelists.listener.PVPListener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;

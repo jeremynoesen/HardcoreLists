@@ -2,7 +2,7 @@ name: HardcoreLists
 version: 1.0.0
 description: Hardcore player lists
 author: Jeremaster101
-main: jndev.hardcorelists.HardcoreLists
+main: jeremynoesen.hardcorelists.HardcoreLists
 api-version: 1.13
 commands:
   pvptime:

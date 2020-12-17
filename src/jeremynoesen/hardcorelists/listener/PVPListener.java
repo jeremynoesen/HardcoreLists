@@ -1,6 +1,6 @@
-package jndev.hardcorelists.listener;
+package jeremynoesen.hardcorelists.listener;
 
-import jndev.hardcorelists.handler.PvPHandler;
+import jeremynoesen.hardcorelists.handler.PvPHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;

@@ -1,4 +1,4 @@
-package jndev.hardcorelists.handler;
+package jeremynoesen.hardcorelists.handler;
 
 /**
  * list types for the player lists

@@ -1,6 +1,6 @@
-package jndev.hardcorelists.listener;
+package jeremynoesen.hardcorelists.listener;
 
-import jndev.hardcorelists.handler.ListHandler;
+import jeremynoesen.hardcorelists.handler.ListHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
