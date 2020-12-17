@@ -1,12 +1,12 @@
-package jndev.hardcorelists.command;
+package jeremynoesen.hardcorelists.command;
 
-import jndev.hardcorelists.Message;
-import jndev.hardcorelists.config.Config;
-import jndev.hardcorelists.config.ConfigType;
-import jndev.hardcorelists.config.Configs;
-import jndev.hardcorelists.handler.ListHandler;
-import jndev.hardcorelists.handler.ListType;
-import jndev.hardcorelists.handler.PvPHandler;
+import jeremynoesen.hardcorelists.Message;
+import jeremynoesen.hardcorelists.config.Config;
+import jeremynoesen.hardcorelists.config.ConfigType;
+import jeremynoesen.hardcorelists.config.Configs;
+import jeremynoesen.hardcorelists.handler.ListHandler;
+import jeremynoesen.hardcorelists.handler.ListType;
+import jeremynoesen.hardcorelists.handler.PvPHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

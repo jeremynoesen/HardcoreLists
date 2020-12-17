@@ -1,6 +1,6 @@
-package jndev.hardcorelists.config;
+package jeremynoesen.hardcorelists.config;
 
-import jndev.hardcorelists.HardcoreLists;
+import jeremynoesen.hardcorelists.HardcoreLists;
 
 import java.io.File;
 import java.io.InputStream;

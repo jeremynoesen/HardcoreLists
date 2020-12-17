@@ -1,8 +1,8 @@
-package jndev.hardcorelists.handler;
+package jeremynoesen.hardcorelists.handler;
 
-import jndev.hardcorelists.Message;
-import jndev.hardcorelists.config.ConfigType;
-import jndev.hardcorelists.config.Configs;
+import jeremynoesen.hardcorelists.Message;
+import jeremynoesen.hardcorelists.config.ConfigType;
+import jeremynoesen.hardcorelists.config.Configs;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;

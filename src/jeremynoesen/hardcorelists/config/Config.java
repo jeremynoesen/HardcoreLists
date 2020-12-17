@@ -1,7 +1,7 @@
-package jndev.hardcorelists.config;
+package jeremynoesen.hardcorelists.config;
 
-import jndev.hardcorelists.HardcoreLists;
-import jndev.hardcorelists.Message;
+import jeremynoesen.hardcorelists.HardcoreLists;
+import jeremynoesen.hardcorelists.Message;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;

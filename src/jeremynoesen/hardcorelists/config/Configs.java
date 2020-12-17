@@ -1,4 +1,4 @@
-package jndev.hardcorelists.config;
+package jeremynoesen.hardcorelists.config;
 
 /**
  * initialize all configs

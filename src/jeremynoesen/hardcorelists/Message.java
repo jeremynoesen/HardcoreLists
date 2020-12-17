@@ -1,8 +1,8 @@
-package jndev.hardcorelists;
+package jeremynoesen.hardcorelists;
 
-import jndev.hardcorelists.config.Config;
-import jndev.hardcorelists.config.ConfigType;
-import jndev.hardcorelists.config.Configs;
+import jeremynoesen.hardcorelists.config.Config;
+import jeremynoesen.hardcorelists.config.ConfigType;
+import jeremynoesen.hardcorelists.config.Configs;
 import org.bukkit.ChatColor;
 
 /**
