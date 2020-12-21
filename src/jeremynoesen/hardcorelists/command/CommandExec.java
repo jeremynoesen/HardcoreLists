@@ -1,9 +1,8 @@
 package jeremynoesen.hardcorelists.command;
 
-import jeremynoesen.hardcorelists.Message;
 import jeremynoesen.hardcorelists.Config;
+import jeremynoesen.hardcorelists.Message;
 import jeremynoesen.hardcorelists.handler.ListHandler;
-import jeremynoesen.hardcorelists.handler.ListType;
 import jeremynoesen.hardcorelists.handler.PvPHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -98,17 +97,17 @@ public class CommandExec implements CommandExecutor {
                                                 case "dead":
                                                     player.sendMessage(Message.DEAD_LIST_TITLE);
                                                     player.sendMessage(ListHandler.listPlayers(
-                                                            page, ListType.DEAD));
+                                                            page, "dead"));
                                                     break;
                                                 case "alive":
                                                     player.sendMessage(Message.ALIVE_LIST_TITLE);
                                                     player.sendMessage(ListHandler.listPlayers(
-                                                            page, ListType.ALIVE));
+                                                            page, "alive"));
                                                     break;
                                                 case "all":
                                                     player.sendMessage(Message.ALL_LIST_TITLE);
                                                     player.sendMessage(ListHandler.listPlayers(
-                                                            page, ListType.ALL));
+                                                            page, "all"));
                                                     break;
                                                 default:
                                                     player.sendMessage(Message.UNKNOWN_COMMAND);
