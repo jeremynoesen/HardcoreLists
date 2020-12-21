@@ -1,8 +1,7 @@
 package jeremynoesen.hardcorelists.handler;
 
+import jeremynoesen.hardcorelists.Config;
 import jeremynoesen.hardcorelists.Message;
-import jeremynoesen.hardcorelists.config.ConfigType;
-import jeremynoesen.hardcorelists.config.Configs;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,7 +23,7 @@ public class PvPHandler {
     /**
      * reference to death list file
      */
-    private static final YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
+    private static final YamlConfiguration players = Config.getPlayersConfig().getConfig();
     
     /**
      * get the hashmap of pvp times for players
@@ -62,7 +61,7 @@ public class PvPHandler {
                         .replace("$PLAYER$", "You"));
             }
         } else {
-            int time = Configs.getConfig(ConfigType.TIME).getConfig().getInt("pvp-countdown-seconds");
+            int time = Config.getTimeConfig().getConfig().getInt("pvp-countdown-seconds");
             pvpplayers.put(player, time);
             player.sendMessage(Message.PVP_DISABLED.replace("$TIME$", Message.convertTime(time)));
         }

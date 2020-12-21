@@ -2,8 +2,6 @@ package jeremynoesen.hardcorelists;
 
 import jeremynoesen.hardcorelists.command.CommandExec;
 import jeremynoesen.hardcorelists.command.CommandTabComplete;
-import jeremynoesen.hardcorelists.config.ConfigType;
-import jeremynoesen.hardcorelists.config.Configs;
 import jeremynoesen.hardcorelists.handler.PvPHandler;
 import jeremynoesen.hardcorelists.listener.DeathListener;
 import jeremynoesen.hardcorelists.listener.PVPListener;
@@ -30,9 +28,9 @@ public class HardcoreLists extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        Configs.getConfig(ConfigType.MESSAGE).saveDefaultConfig();
-        Configs.getConfig(ConfigType.TIME).saveDefaultConfig();
-        Configs.getConfig(ConfigType.PLAYERS).saveDefaultConfig();
+        Config.getMessageConfig().saveDefaultConfig();
+        Config.getTimeConfig().saveDefaultConfig();
+        Config.getPlayersConfig().saveDefaultConfig();
         Message.reloadMessages();
         PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new DeathListener(), this);
@@ -58,9 +56,9 @@ public class HardcoreLists extends JavaPlugin {
     @Override
     public void onDisable() {
         plugin = null;
-        Configs.getConfig(ConfigType.MESSAGE).saveConfig();
-        Configs.getConfig(ConfigType.TIME).saveConfig();
-        Configs.getConfig(ConfigType.PLAYERS).saveConfig();
+        Config.getMessageConfig().saveConfig();
+        Config.getTimeConfig().saveConfig();
+        Config.getPlayersConfig().saveConfig();
     }
     
     /**

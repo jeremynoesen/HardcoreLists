@@ -1,8 +1,5 @@
 package jeremynoesen.hardcorelists;
 
-import jeremynoesen.hardcorelists.config.Config;
-import jeremynoesen.hardcorelists.config.ConfigType;
-import jeremynoesen.hardcorelists.config.Configs;
 import org.bukkit.ChatColor;
 
 /**
@@ -12,7 +9,7 @@ import org.bukkit.ChatColor;
  */
 public class Message {
     
-    private static final Config messageConfig = Configs.getConfig(ConfigType.MESSAGE);
+    private static final Config messageConfig = Config.getMessageConfig();
     
     public static String PREFIX;
     public static String PVP_ENABLED;
