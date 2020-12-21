@@ -96,18 +96,13 @@ public class CommandExec implements CommandExecutor {
                                             switch (args[1].toLowerCase()) {
                                                 case "dead":
                                                     player.sendMessage(Message.DEAD_LIST_TITLE);
-                                                    player.sendMessage(ListHandler.listPlayers(
-                                                            page, "dead"));
+                                                    player.sendMessage(ListHandler.getListPage(
+                                                            page, ListHandler.getDead()));
                                                     break;
                                                 case "alive":
                                                     player.sendMessage(Message.ALIVE_LIST_TITLE);
-                                                    player.sendMessage(ListHandler.listPlayers(
-                                                            page, "alive"));
-                                                    break;
-                                                case "all":
-                                                    player.sendMessage(Message.ALL_LIST_TITLE);
-                                                    player.sendMessage(ListHandler.listPlayers(
-                                                            page, "all"));
+                                                    player.sendMessage(ListHandler.getListPage(
+                                                            page, ListHandler.getAlive()));
                                                     break;
                                                 default:
                                                     player.sendMessage(Message.UNKNOWN_COMMAND);
@@ -144,9 +139,6 @@ public class CommandExec implements CommandExecutor {
                 }
                 for (String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
                     players.getConfig().set("alivw." + key, null);
-                }
-                for (String key : players.getConfig().getConfigurationSection("all").getKeys(false)) {
-                    players.getConfig().set("all." + key, null);
                 }
                 for (String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
                     players.getConfig().set("pvp-times." + key, null);

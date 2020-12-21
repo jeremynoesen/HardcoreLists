@@ -31,6 +31,7 @@ public class HardcoreLists extends JavaPlugin {
         Config.getMessageConfig().saveDefaultConfig();
         Config.getTimeConfig().saveDefaultConfig();
         Config.getPlayersConfig().saveDefaultConfig();
+        ListHandler.load();
         Message.reloadMessages();
         PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new ListHandler(), this);
@@ -58,9 +59,8 @@ public class HardcoreLists extends JavaPlugin {
     @Override
     public void onDisable() {
         for(Player player : PvPHandler.getPvPTimes().keySet()) PvPHandler.savePlayer(player);
-        Config.getMessageConfig().saveConfig();
+        ListHandler.save();
         Config.getTimeConfig().saveConfig();
-        Config.getPlayersConfig().saveConfig();
         plugin = null;
     }
     

@@ -1,4 +1,3 @@
-all: {}
-alive: {}
-dead: {}
+alive: []
+dead: []
 pvp-times: {}

@@ -2,6 +2,7 @@ package jeremynoesen.hardcorelists.handler;
 
 import jeremynoesen.hardcorelists.Config;
 import jeremynoesen.hardcorelists.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,63 +11,59 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
- * class to handle death list data
+ * class to handle player list data
  *
  * @author Jeremy Noesen
  */
 public class ListHandler implements Listener {
     
     /**
+     * alive player list
+     */
+    private static ArrayList<Player> alive = new ArrayList<>();
+    
+    /**
+     * dead player list
+     */
+    private static ArrayList<Player> dead = new ArrayList<>();
+    
+    /**
      * reference to player list file
      */
-    private static final YamlConfiguration players = Config.getPlayersConfig().getConfig();
+    private static YamlConfiguration players = Config.getPlayersConfig().getConfig();
     
     /**
-     * add player tyo list of all players, as well as the alive list if they are not in the dead list
-     *
-     * @param player player to initialize
+     * load the player lists from file
      */
-    public static void initPlayer(Player player) {
-        if (players.getConfigurationSection("dead") == null ||
-                !players.getConfigurationSection("dead").getKeys(false).contains(player.getUniqueId().toString())) {
-            players.set("alive." + player.getUniqueId(), player.getName());
+    public static void load() {
+        for (String s : players.getStringList("alive")) {
+            alive.add(Bukkit.getPlayer(UUID.fromString(s)));
         }
-        players.set("all." + player.getUniqueId(), player.getName());
+        for (String s : players.getStringList("dead")) {
+            dead.add(Bukkit.getPlayer(UUID.fromString(s)));
+        }
     }
     
     /**
-     * add player to death list and remove from alive if they are in it
-     *
-     * @param player player to set as dead
+     * save player lists to file
      */
-    public static void addDeath(Player player) {
-        if (players.getConfigurationSection("alive") != null &&
-                players.getConfigurationSection("alive").getKeys(false).contains(player.getUniqueId().toString())) {
-            players.set("alive." + player.getUniqueId(), null);
+    public static void save() {
+        players.set("alive", null);
+        ArrayList<String> strings = new ArrayList<>();
+        for(Player p : alive) {
+            strings.add(p.getUniqueId().toString());
         }
-        players.set("dead." + player.getUniqueId(), player.getName());
-    }
-    
-    /**
-     * get a page from the list of players for the desired list type
-     *
-     * @param page page of list
-     * @param listName list name
-     * @return formatted string array with the list of names from the specified list
-     */
-    public static String[] listPlayers(int page, String listName) {
-        switch (listName) {
-            case "dead":
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("dead").getKeys(false)), listName);
-            case "alive":
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("alive").getKeys(false)), listName);
-            case "all":
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("all").getKeys(false)), listName);
-            default:
-                return null;
+        players.set("alive", strings);
+        players.set("dead", null);
+        strings.clear();
+        for(Player p : dead) {
+            strings.add(p.getUniqueId().toString());
         }
+        players.set("dead", strings);
+        Config.getPlayersConfig().saveConfig();
     }
     
     /**
@@ -76,19 +73,37 @@ public class ListHandler implements Listener {
      * @param list list to get page pf
      * @return string array formatted with the list of names
      */
-    private static String[] getListPage(int page, ArrayList<String> list, String listName) {
+    public static String[] getListPage(int page, ArrayList<Player> list) {
         int LENGTH = 10;
         int actualPages = (list.size() / LENGTH) + (list.size() % LENGTH > 0 ? 1 : 0);
         if (page > actualPages) page = actualPages;
         String[] stringList = new String[Math.min(LENGTH, list.size())];
         for (int i = 0; i < stringList.length; i++) {
             int shift = i + (LENGTH * (page - 1));
-            String name = players.getString(listName + "." + list.get(shift));
+            String name = list.get(shift).getName();
             stringList[i] = Message.LIST_FORMAT
                     .replace("$POS$", Integer.toString(shift + 1))
                     .replace("$PLAYER$", name);
         }
         return stringList;
+    }
+    
+    /**
+     * get teh alive players list
+     *
+     * @return list of alive players
+     */
+    public static ArrayList<Player> getAlive() {
+        return alive;
+    }
+    
+    /**
+     * get the dead players list
+     *
+     * @return list of dead players
+     */
+    public static ArrayList<Player> getDead() {
+        return dead;
     }
     
     /**
@@ -98,7 +113,8 @@ public class ListHandler implements Listener {
      */
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        ListHandler.addDeath(e.getEntity());
+        alive.remove(e.getEntity());
+        dead.add(e.getEntity());
     }
     
     /**
@@ -109,6 +125,6 @@ public class ListHandler implements Listener {
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        ListHandler.initPlayer(e.getPlayer());
+        if(!dead.contains(e.getPlayer()) && !alive.contains(e.getPlayer())) alive.add(e.getPlayer());
     }
 }
