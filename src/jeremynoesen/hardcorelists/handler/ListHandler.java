@@ -11,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -51,18 +52,19 @@ public class ListHandler implements Listener {
      * save player lists to file
      */
     public static void save() {
-        players.set("alive", null);
-        ArrayList<String> strings = new ArrayList<>();
+        List<String> alivelist = players.getStringList("dead");
+        alivelist.clear();
         for(Player p : alive) {
-            strings.add(p.getUniqueId().toString());
+            alivelist.add(p.getUniqueId().toString());
         }
-        players.set("alive", strings);
-        players.set("dead", null);
-        strings.clear();
+        players.set("alive", alivelist);
+        
+        List<String> deadlist = players.getStringList("dead");
+        deadlist.clear();
         for(Player p : dead) {
-            strings.add(p.getUniqueId().toString());
+            deadlist.add(p.getUniqueId().toString());
         }
-        players.set("dead", strings);
+        players.set("dead", deadlist);
         Config.getPlayersConfig().saveConfig();
     }
     
