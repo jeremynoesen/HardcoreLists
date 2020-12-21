@@ -1,8 +1,7 @@
 package jeremynoesen.hardcorelists.handler;
 
+import jeremynoesen.hardcorelists.Config;
 import jeremynoesen.hardcorelists.Message;
-import jeremynoesen.hardcorelists.config.ConfigType;
-import jeremynoesen.hardcorelists.config.Configs;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -18,7 +17,7 @@ public class ListHandler {
     /**
      * reference to player list file
      */
-    private static final YamlConfiguration players = Configs.getConfig(ConfigType.PLAYERS).getConfig();
+    private static final YamlConfiguration players = Config.getPlayersConfig().getConfig();
     
     /**
      * add player tyo list of all players, as well as the alive list if they are not in the dead list

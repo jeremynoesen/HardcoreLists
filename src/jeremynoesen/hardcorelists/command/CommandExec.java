@@ -1,9 +1,7 @@
 package jeremynoesen.hardcorelists.command;
 
 import jeremynoesen.hardcorelists.Message;
-import jeremynoesen.hardcorelists.config.Config;
-import jeremynoesen.hardcorelists.config.ConfigType;
-import jeremynoesen.hardcorelists.config.Configs;
+import jeremynoesen.hardcorelists.Config;
 import jeremynoesen.hardcorelists.handler.ListHandler;
 import jeremynoesen.hardcorelists.handler.ListType;
 import jeremynoesen.hardcorelists.handler.PvPHandler;
@@ -66,9 +64,9 @@ public class CommandExec implements CommandExecutor {
                         if (args.length > 0) {
                             switch (args[0].toLowerCase()) {
                                 case "reload":
-                                    Configs.getConfig(ConfigType.TIME).reloadConfig();
-                                    Configs.getConfig(ConfigType.MESSAGE).reloadConfig();
-                                    Configs.getConfig(ConfigType.PLAYERS).reloadConfig();
+                                    Config.getTimeConfig().reloadConfig();
+                                    Config.getMessageConfig().reloadConfig();
+                                    Config.getPlayersConfig().reloadConfig();
                                     player.sendMessage(Message.RELOAD);
                                     break;
                                 case "reset":
@@ -80,7 +78,7 @@ public class CommandExec implements CommandExecutor {
                                 case "timer":
                                     if (args.length > 2 && args[1] != null && args[1].equalsIgnoreCase("set") && args[2] != null) {
                                         try {
-                                            Configs.getConfig(ConfigType.TIME).getConfig()
+                                            Config.getTimeConfig().getConfig()
                                                     .set("pvp-countdown-seconds", Integer.valueOf(args[2]));
                                             player.sendMessage(Message.SET_TIME.replace("$TIME$",
                                                     Message.convertTime(Integer.valueOf(args[2]))));
@@ -141,7 +139,7 @@ public class CommandExec implements CommandExecutor {
                 console.sendMessage(Message.CANT_RESET);
             } else {
                 PvPHandler.getPvPTimes().clear();
-                Config players = Configs.getConfig(ConfigType.PLAYERS);
+                Config players = Config.getPlayersConfig();
                 for (String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
                     players.getConfig().set("dead." + key, null);
                 }
