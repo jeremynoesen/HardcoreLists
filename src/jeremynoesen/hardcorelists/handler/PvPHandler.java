@@ -2,6 +2,7 @@ package jeremynoesen.hardcorelists.handler;
 
 import jeremynoesen.hardcorelists.Config;
 import jeremynoesen.hardcorelists.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -9,9 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * methods to tick player times and load the last known times from file
@@ -23,7 +24,7 @@ public class PvPHandler implements Listener {
     /**
      * hashmap with all players and times
      */
-    private static final HashMap<Player, Integer> pvpplayers = new HashMap<>();
+    private static final HashMap<Player, Integer> pvptimes = new HashMap<>();
     
     /**
      * reference to death list file
@@ -36,7 +37,29 @@ public class PvPHandler implements Listener {
      * @return hashmap of player pvp times
      */
     public static HashMap<Player, Integer> getPvPTimes() {
-        return pvpplayers;
+        return pvptimes;
+    }
+    
+    /**
+     * load the player times from file
+     */
+    public static void load() {
+        for (String s : players.getConfigurationSection("pvp-times").getKeys(false)) {
+            pvptimes.put(Bukkit.getPlayer(UUID.fromString(s)), players.getInt("pvp-times." + s));
+        }
+    }
+    
+    /**
+     * save player times to file
+     */
+    public static void save() {
+        for (String s : players.getConfigurationSection("pvp-times").getKeys(false)) {
+            players.set("pvp-times." + s, null);
+        }
+        for (Player player : pvptimes.keySet()) {
+            players.set("pvp-times." + player.getUniqueId().toString(), pvptimes.get(player));
+        }
+        Config.getPlayersConfig().saveConfig();
     }
     
     /**
@@ -46,72 +69,33 @@ public class PvPHandler implements Listener {
      * @return time left on their clock
      */
     public static int getPlayerTime(Player player) {
-        if (pvpplayers.containsKey(player)) return pvpplayers.get(player);
+        if (pvptimes.containsKey(player) && pvptimes.get(player) > 0) return pvptimes.get(player);
         return 0;
     }
     
     /**
-     * initialize a player's pvp timer, either starting it or resuming it from the last known time
-     *
-     * @param player player to initialize
-     */
-    public static void initPlayer(Player player) {
-        if (players.getConfigurationSection("pvp-times") != null &&
-                players.getConfigurationSection("pvp-times").getKeys(false).contains(player.getUniqueId().toString())) {
-            int time = players.getInt("pvp-times." + player.getUniqueId().toString());
-            if (time > 0) {
-                pvpplayers.put(player, time);
-                player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                        Message.convertTime(PvPHandler.getPlayerTime(player)))
-                        .replace("$PLAYER$", "You"));
-            }
-        } else {
-            int time = Config.getTimeConfig().getConfig().getInt("pvp-countdown-seconds");
-            pvpplayers.put(player, time);
-            player.sendMessage(Message.PVP_DISABLED.replace("$TIME$", Message.convertTime(time)));
-        }
-    }
-    
-    /**
-     * tick a player's time, reduces 1 second or removes them if their timer ends
+     * tick a player's time, reduces 1 second
      */
     public static void tickPlayers() {
-        for (Player player : pvpplayers.keySet()) {
-            if (pvpplayers.get(player) == 0) {
-                players.set("pvp-times." + player.getUniqueId().toString(), 0);
-                pvpplayers.remove(player);
-                player.sendMessage(Message.PVP_ENABLED);
-            }
-            pvpplayers.put(player, pvpplayers.get(player) - 1);
+        for (Player player : pvptimes.keySet()) {
+            if (pvptimes.get(player) == 0) player.sendMessage(Message.PVP_ENABLED);
+            if (pvptimes.get(player) > -1) pvptimes.put(player, pvptimes.get(player) - 1);
         }
     }
     
     /**
-     * save a player's time remaining
-     *
-     * @param player player to save
-     */
-    public static void savePlayer(Player player) {
-        if (pvpplayers.containsKey(player)) {
-            players.set("pvp-times." + player.getUniqueId().toString(), PvPHandler.getPlayerTime(player));
-        } else {
-            players.set("pvp-times." + player.getUniqueId().toString(), 0);
-        }
-        pvpplayers.remove(player);
-    }
-    
-    /**
-     * check if the player or damager can not pvp, and if so, cancel the event
+     * check if the player or damager can not pvp
      *
      * @param player  player being hurt
      * @param damager damager
-     * @param e       event to check pvp in
      */
-    public static void checkPvP(Player player, Player damager, EntityDamageByEntityEvent e) {
-        if (pvpplayers.containsKey(player) || pvpplayers.containsKey(damager)) {
-            e.setCancelled(true);
+    public static boolean canPvP(Player player, Player damager) {
+        if ((pvptimes.containsKey(player) && pvptimes.get(player) > 0) ||
+                (pvptimes.containsKey(damager) && pvptimes.get(damager) > 0)) {
             damager.sendMessage(Message.CANT_HURT);
+            return false;
         }
+        return true;
     }
     
     /**
@@ -122,35 +106,22 @@ public class PvPHandler implements Listener {
     @EventHandler
     public void onPvP(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
-            Player damager = (Player) e.getDamager();
-            Player player = (Player) e.getEntity();
-            PvPHandler.checkPvP(player, damager, e);
-        } else if (e.getDamager() instanceof Projectile &&
-                ((Projectile) e.getDamager()).getShooter() instanceof Player &&
-                e.getEntity() instanceof Player) {
-            Player player = (Player) e.getEntity();
-            Player damager = (Player) ((Projectile) e.getDamager()).getShooter();
-            PvPHandler.checkPvP(player, damager, e);
+            e.setCancelled(canPvP((Player) e.getEntity(), (Player) e.getDamager()));
+        } else if (e.getDamager() instanceof Projectile && ((Projectile) e.getDamager()).getShooter() instanceof Player
+                && e.getEntity() instanceof Player) {
+            e.setCancelled(canPvP((Player) e.getEntity(), (Player) ((Projectile) e.getDamager()).getShooter()));
+            
         }
     }
     
     /**
-     * starts or reloads a player's clock on join
+     * initialize a new player's clock
      *
      * @param e
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        PvPHandler.initPlayer(e.getPlayer());
-    }
-    
-    /**
-     * save a player's time when they leave
-     *
-     * @param e
-     */
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        PvPHandler.savePlayer(e.getPlayer());
+        if (!pvptimes.containsKey(e.getPlayer())) pvptimes.put(e.getPlayer(),
+                Config.getTimeConfig().getConfig().getInt("pvp-countdown-seconds"));
     }
 }
