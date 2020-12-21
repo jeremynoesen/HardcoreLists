@@ -1,5 +1,5 @@
 name: HardcoreLists
-version: 1.0.0
+version: 1.0.1
 description: Hardcore player lists
 author: Jeremaster101
 main: jeremynoesen.hardcorelists.HardcoreLists
@@ -8,7 +8,9 @@ commands:
   pvptime:
     description: Get the time remaining on your pvp timer
     usage: /<command>
+    aliases: [pt]
   hardcorelists:
     description: HardcoreLists admin command. Use /hardcorelists help
     usage: /<command>
+    aliases: [hl]
 
