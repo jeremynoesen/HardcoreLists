@@ -110,7 +110,6 @@ public class PvPHandler implements Listener {
         } else if (e.getDamager() instanceof Projectile && ((Projectile) e.getDamager()).getShooter() instanceof Player
                 && e.getEntity() instanceof Player) {
             e.setCancelled(canPvP((Player) e.getEntity(), (Player) ((Projectile) e.getDamager()).getShooter()));
-            
         }
     }
     
@@ -121,7 +120,15 @@ public class PvPHandler implements Listener {
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        if (!pvptimes.containsKey(e.getPlayer())) pvptimes.put(e.getPlayer(),
-                Config.getTimeConfig().getConfig().getInt("pvp-countdown-seconds"));
+        Player player = e.getPlayer();
+        if (!pvptimes.containsKey(player)) {
+            pvptimes.put(player, Config.getTimeConfig().getConfig().getInt("pvp-countdown-seconds"));
+            e.getPlayer().sendMessage(Message.PVP_DISABLED
+                    .replace("$TIME$", Message.convertTime(pvptimes.get(player))));
+        } else {
+            player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
+                    Message.convertTime(PvPHandler.getPlayerTime(player)))
+                    .replace("$PLAYER$", "You"));
+        }
     }
 }
