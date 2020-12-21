@@ -39,7 +39,9 @@ public class HardcoreLists extends JavaPlugin {
         getCommand("hardcorelists").setExecutor(commandExec);
         getCommand("pvptime").setExecutor(commandExec);
         getCommand("hardcorelists").setTabCompleter(new CommandTabComplete());
-        
+    
+        plugin.getServer().getConsoleSender().sendMessage(Message.STARTUP);
+    
         // tick player timers every second
         new BukkitRunnable() {
             @Override
@@ -54,10 +56,10 @@ public class HardcoreLists extends JavaPlugin {
      */
     @Override
     public void onDisable() {
-        plugin = null;
         Config.getMessageConfig().saveConfig();
         Config.getTimeConfig().saveConfig();
         Config.getPlayersConfig().saveConfig();
+        plugin = null;
     }
     
     /**
