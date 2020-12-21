@@ -30,7 +30,8 @@ public class CommandTabComplete implements TabCompleter {
         
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (label.equalsIgnoreCase("hardcorelists") && player.hasPermission("hardcorelists.admin")) {
+            if ((label.equalsIgnoreCase("hardcorelists") || label.equalsIgnoreCase("hl")) &&
+                    player.hasPermission("hardcorelists.admin")) {
                 if (args.length == 1) {
                     if (args[0].toLowerCase().startsWith("h")) list.add("help");
                     else if (args[0].toLowerCase().startsWith("l")) list.add("list");

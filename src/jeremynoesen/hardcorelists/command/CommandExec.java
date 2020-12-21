@@ -37,6 +37,7 @@ public class CommandExec implements CommandExecutor {
             Player player = (Player) commandSender;
             switch (label.toLowerCase()) {
                 case "pvptime":
+                case "pt":
                     if (player.hasPermission("hardcorelists.admin")) {
                         if (args.length > 0) {
                             try {
@@ -60,6 +61,7 @@ public class CommandExec implements CommandExecutor {
                     }
                     break;
                 case "hardcorelists":
+                case "hl":
                     if (player.hasPermission("hardcorelists.admin")) {
                         if (args.length > 0) {
                             switch (args[0].toLowerCase()) {
