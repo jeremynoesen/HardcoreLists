@@ -4,7 +4,6 @@ import jeremynoesen.hardcorelists.command.CommandExec;
 import jeremynoesen.hardcorelists.command.CommandTabComplete;
 import jeremynoesen.hardcorelists.handler.ListHandler;
 import jeremynoesen.hardcorelists.handler.PvPHandler;
-import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,6 +30,7 @@ public class HardcoreLists extends JavaPlugin {
         Config.getMessageConfig().saveDefaultConfig();
         Config.getTimeConfig().saveDefaultConfig();
         Config.getPlayersConfig().saveDefaultConfig();
+        PvPHandler.load();
         ListHandler.load();
         Message.reloadMessages();
         PluginManager pm = plugin.getServer().getPluginManager();
@@ -58,7 +58,7 @@ public class HardcoreLists extends JavaPlugin {
      */
     @Override
     public void onDisable() {
-        for(Player player : PvPHandler.getPvPTimes().keySet()) PvPHandler.savePlayer(player);
+        PvPHandler.save();
         ListHandler.save();
         Config.getTimeConfig().saveConfig();
         plugin = null;
