@@ -80,8 +80,8 @@ public class ListHandler implements Listener {
         int LENGTH = 10;
         int actualPages = (list.size() / LENGTH) + (list.size() % LENGTH > 0 ? 1 : 0);
         if (page > actualPages) page = actualPages;
-        String[] stringList = new String[10];
-        for (int i = 0; i < Math.min(LENGTH, list.size()); i++) {
+        String[] stringList = new String[Math.min(LENGTH, list.size())];
+        for (int i = 0; i < stringList.length; i++) {
             int shift = i + (LENGTH * (page - 1));
             String name = players.getString(listName + "." + list.get(shift));
             stringList[i] = Message.LIST_FORMAT
