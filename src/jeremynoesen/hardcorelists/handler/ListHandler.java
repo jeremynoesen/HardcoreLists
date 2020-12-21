@@ -4,6 +4,10 @@ import jeremynoesen.hardcorelists.Config;
 import jeremynoesen.hardcorelists.Message;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
 
@@ -12,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author Jeremy Noesen
  */
-public class ListHandler {
+public class ListHandler implements Listener {
     
     /**
      * reference to player list file
@@ -49,17 +53,17 @@ public class ListHandler {
      * get a page from the list of players for the desired list type
      *
      * @param page page of list
-     * @param type list type
+     * @param listName list name
      * @return formatted string array with the list of names from the specified list
      */
-    public static String[] listPlayers(int page, ListType type) {
-        switch (type) {
-            case DEAD:
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("dead").getKeys(false)), type);
-            case ALIVE:
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("alive").getKeys(false)), type);
-            case ALL:
-                return getListPage(page, new ArrayList<>(players.getConfigurationSection("all").getKeys(false)), type);
+    public static String[] listPlayers(int page, String listName) {
+        switch (listName) {
+            case "dead":
+                return getListPage(page, new ArrayList<>(players.getConfigurationSection("dead").getKeys(false)), listName);
+            case "alive":
+                return getListPage(page, new ArrayList<>(players.getConfigurationSection("alive").getKeys(false)), listName);
+            case "all":
+                return getListPage(page, new ArrayList<>(players.getConfigurationSection("all").getKeys(false)), listName);
             default:
                 return null;
         }
@@ -72,18 +76,39 @@ public class ListHandler {
      * @param list list to get page pf
      * @return string array formatted with the list of names
      */
-    private static String[] getListPage(int page, ArrayList<String> list, ListType type) {
+    private static String[] getListPage(int page, ArrayList<String> list, String listName) {
         int LENGTH = 10;
         int actualPages = (list.size() / LENGTH) + (list.size() % LENGTH > 0 ? 1 : 0);
         if (page > actualPages) page = actualPages;
         String[] stringList = new String[10];
         for (int i = 0; i < Math.min(LENGTH, list.size()); i++) {
             int shift = i + (LENGTH * (page - 1));
-            String name = players.getString(type.toString().toLowerCase() + "." + list.get(shift));
+            String name = players.getString(listName + "." + list.get(shift));
             stringList[i] = Message.LIST_FORMAT
                     .replace("$POS$", Integer.toString(shift + 1))
                     .replace("$PLAYER$", name);
         }
         return stringList;
+    }
+    
+    /**
+     * event called when a player dies, will remove player from alive list and add to dead list
+     *
+     * @param e
+     */
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        ListHandler.addDeath(e.getEntity());
+    }
+    
+    /**
+     * event called when a player joins, will add them to the list of all players, as well as the alive list if they're
+     * not dead
+     *
+     * @param e
+     */
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e) {
+        ListHandler.initPlayer(e.getPlayer());
     }
 }

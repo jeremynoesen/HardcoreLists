@@ -2,9 +2,8 @@ package jeremynoesen.hardcorelists;
 
 import jeremynoesen.hardcorelists.command.CommandExec;
 import jeremynoesen.hardcorelists.command.CommandTabComplete;
+import jeremynoesen.hardcorelists.handler.ListHandler;
 import jeremynoesen.hardcorelists.handler.PvPHandler;
-import jeremynoesen.hardcorelists.listener.DeathListener;
-import jeremynoesen.hardcorelists.listener.PVPListener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,8 +32,8 @@ public class HardcoreLists extends JavaPlugin {
         Config.getPlayersConfig().saveDefaultConfig();
         Message.reloadMessages();
         PluginManager pm = plugin.getServer().getPluginManager();
-        pm.registerEvents(new DeathListener(), this);
-        pm.registerEvents(new PVPListener(), this);
+        pm.registerEvents(new ListHandler(), this);
+        pm.registerEvents(new PvPHandler(), this);
         pm.addPermission(new Permission("hardcorelists.admin"));
         CommandExec commandExec = new CommandExec();
         getCommand("hardcorelists").setExecutor(commandExec);
