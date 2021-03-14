@@ -52,14 +52,14 @@ public class Message {
         
         HELP = new String[]{
                 "",
-                ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "-------------[" + PREFIX +
+                ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "---------[" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD +
+                        "Hardcore" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "Lists" +
                         ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
-                        + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]-------------",
-                ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View time remaining on your pvp timer",
+                        + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]---------",
                 ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View time remaining on an online player's pvp timer",
                 ChatColor.GRAY + "/hardcorelists reload" + ChatColor.WHITE + ": Reload all config and data files for the plugin",
                 ChatColor.GRAY + "/hardcorelists timer set <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
-                ChatColor.GRAY + "/hardcorelists list dead/alive/all <page>" + ChatColor.WHITE + ": Get players in a list by page",
+                ChatColor.GRAY + "/hardcorelists list dead/alive <page>" + ChatColor.WHITE + ": Get players in a list by page",
                 ChatColor.GRAY + "/hardcorelists reset" + ChatColor.WHITE + ": Reset data, can only be run by console when nobody is online",
                 ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------------------------------",
                 ""
