@@ -129,21 +129,25 @@ public class CommandExec implements CommandExecutor {
             }
         } else if (commandSender instanceof ConsoleCommandSender) {
             ConsoleCommandSender console = (ConsoleCommandSender) commandSender;
-            if (Bukkit.getOnlinePlayers().size() > 0) {
-                console.sendMessage(Message.CANT_RESET);
+            if(args.length > 0 && args[0].equalsIgnoreCase("reset")) {
+                if (Bukkit.getOnlinePlayers().size() > 0) {
+                    console.sendMessage(Message.CANT_RESET);
+                } else {
+                    PvPHandler.getPvPTimes().clear();
+                    Config players = Config.getPlayersConfig();
+                    for (String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
+                        players.getConfig().set("dead." + key, null);
+                    }
+                    for (String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
+                        players.getConfig().set("alivw." + key, null);
+                    }
+                    for (String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
+                        players.getConfig().set("pvp-times." + key, null);
+                    }
+                    console.sendMessage(Message.RESET);
+                }
             } else {
-                PvPHandler.getPvPTimes().clear();
-                Config players = Config.getPlayersConfig();
-                for (String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
-                    players.getConfig().set("dead." + key, null);
-                }
-                for (String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
-                    players.getConfig().set("alivw." + key, null);
-                }
-                for (String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
-                    players.getConfig().set("pvp-times." + key, null);
-                }
-                console.sendMessage(Message.RESET);
+                console.sendMessage(Message.UNKNOWN_COMMAND);
             }
         }
         return true;
