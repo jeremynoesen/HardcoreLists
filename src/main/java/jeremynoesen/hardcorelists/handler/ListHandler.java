@@ -52,7 +52,7 @@ public class ListHandler implements Listener {
      * save player lists to file
      */
     public static void save() {
-        List<String> alivelist = players.getStringList("dead");
+        List<String> alivelist = players.getStringList("alive");
         alivelist.clear();
         for(Player p : alive) {
             alivelist.add(p.getUniqueId().toString());
