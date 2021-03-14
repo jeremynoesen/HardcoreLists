@@ -36,8 +36,8 @@ public class HardcoreLists extends JavaPlugin {
         Message.reloadMessages();
         
         PluginManager pm = plugin.getServer().getPluginManager();
-        pm.registerEvents(new ListHandler(), this);
-        pm.registerEvents(new PvPHandler(), this);
+        pm.registerEvents(new ListHandler(), plugin);
+        pm.registerEvents(new PvPHandler(), plugin);
         pm.addPermission(new Permission("hardcorelists.admin"));
         
         CommandExec commandExec = new CommandExec();

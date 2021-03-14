@@ -45,7 +45,7 @@ public class PvPHandler implements Listener {
      */
     public static void load() {
         for (String s : players.getConfigurationSection("pvp-times").getKeys(false)) {
-            pvptimes.put(Bukkit.getPlayer(UUID.fromString(s)), players.getInt("pvp-times." + s));
+            pvptimes.put(Bukkit.getOfflinePlayer(UUID.fromString(s)).getPlayer(), players.getInt("pvp-times." + s));
         }
     }
     
@@ -78,8 +78,10 @@ public class PvPHandler implements Listener {
      */
     public static void tickPlayers() {
         for (Player player : pvptimes.keySet()) {
-            if (pvptimes.get(player) == 0) player.sendMessage(Message.PVP_ENABLED);
-            if (pvptimes.get(player) > -1) pvptimes.put(player, pvptimes.get(player) - 1);
+            if(pvptimes.get(player) != null && player.isOnline()) {
+                if (pvptimes.get(player) == 0) player.sendMessage(Message.PVP_ENABLED);
+                if (pvptimes.get(player) > -1) pvptimes.put(player, pvptimes.get(player) - 1);
+            }
         }
     }
     
