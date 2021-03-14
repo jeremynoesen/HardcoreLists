@@ -27,23 +27,24 @@ public class HardcoreLists extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        
         Config.getMessageConfig().saveDefaultConfig();
         Config.getTimeConfig().saveDefaultConfig();
         Config.getPlayersConfig().saveDefaultConfig();
         PvPHandler.load();
         ListHandler.load();
         Message.reloadMessages();
+        
         PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new ListHandler(), this);
         pm.registerEvents(new PvPHandler(), this);
         pm.addPermission(new Permission("hardcorelists.admin"));
+        
         CommandExec commandExec = new CommandExec();
         getCommand("hardcorelists").setExecutor(commandExec);
         getCommand("pvptime").setExecutor(commandExec);
         getCommand("hardcorelists").setTabCompleter(new CommandTabComplete());
-    
-        plugin.getServer().getConsoleSender().sendMessage(Message.STARTUP);
-    
+        
         // tick player timers every second
         new BukkitRunnable() {
             @Override

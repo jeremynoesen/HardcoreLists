@@ -66,8 +66,6 @@ public class Message {
         };
     }
     
-    public static String STARTUP = "HardcoreLists version " + HardcoreLists.getInstance().getDescription().getVersion() + " " + "has " + "been enabled!\n";
-    
     /**
      * Apply color codes and line breaks to a message
      *
