@@ -66,6 +66,9 @@ public class CommandExec implements CommandExecutor {
                                     Config.getTimeConfig().reloadConfig();
                                     Config.getMessageConfig().reloadConfig();
                                     Config.getPlayersConfig().reloadConfig();
+                                    PvPHandler.load();
+                                    ListHandler.load();
+                                    Message.reloadMessages();
                                     player.sendMessage(Message.RELOAD);
                                     break;
                                 case "reset":
