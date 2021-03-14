@@ -132,20 +132,29 @@ public class CommandExec implements CommandExecutor {
             }
         } else if (commandSender instanceof ConsoleCommandSender) {
             ConsoleCommandSender console = (ConsoleCommandSender) commandSender;
-            if(args.length > 0 && args[0].equalsIgnoreCase("reset")) {
+            if (args.length > 0 && args[0].equalsIgnoreCase("reset")) {
                 if (Bukkit.getOnlinePlayers().size() > 0) {
                     console.sendMessage(Message.CANT_RESET);
                 } else {
                     PvPHandler.getPvPTimes().clear();
                     Config players = Config.getPlayersConfig();
-                    for (String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
-                        players.getConfig().set("dead." + key, null);
+                    try {
+                        for (String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
+                            players.getConfig().set("dead." + key, null);
+                        }
+                    } catch (NullPointerException ignored) {
                     }
-                    for (String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
-                        players.getConfig().set("alivw." + key, null);
+                    try {
+                        for (String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
+                            players.getConfig().set("alive." + key, null);
+                        }
+                    } catch (NullPointerException ignored) {
                     }
-                    for (String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
-                        players.getConfig().set("pvp-times." + key, null);
+                    try {
+                        for (String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
+                            players.getConfig().set("pvp-times." + key, null);
+                        }
+                    } catch (NullPointerException ignored) {
                     }
                     console.sendMessage(Message.RESET);
                 }
