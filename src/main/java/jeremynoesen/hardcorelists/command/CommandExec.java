@@ -12,6 +12,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+
 /**
  * command executor for the plugin's commands
  *
@@ -139,24 +141,18 @@ public class CommandExec implements CommandExecutor {
                 } else {
                     PvPHandler.getPvPTimes().clear();
                     Config players = Config.getPlayersConfig();
-                    try {
-                        for (String key : players.getConfig().getConfigurationSection("dead").getKeys(false)) {
-                            players.getConfig().set("dead." + key, null);
-                        }
-                    } catch (NullPointerException ignored) {
-                    }
-                    try {
-                        for (String key : players.getConfig().getConfigurationSection("alive").getKeys(false)) {
-                            players.getConfig().set("alive." + key, null);
-                        }
-                    } catch (NullPointerException ignored) {
-                    }
+                    players.getConfig().set("dead", new ArrayList<String>());
+                    ListHandler.getDead().clear();
+                    players.getConfig().set("alive", new ArrayList<String>());
+                    ListHandler.getAlive().clear();
                     try {
                         for (String key : players.getConfig().getConfigurationSection("pvp-times").getKeys(false)) {
                             players.getConfig().set("pvp-times." + key, null);
                         }
+                        PvPHandler.getPvPTimes().clear();
                     } catch (NullPointerException ignored) {
                     }
+                    players.saveConfig();
                     console.sendMessage(Message.RESET);
                 }
             } else {
