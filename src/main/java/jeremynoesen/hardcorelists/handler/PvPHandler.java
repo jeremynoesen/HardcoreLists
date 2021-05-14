@@ -3,6 +3,7 @@ package jeremynoesen.hardcorelists.handler;
 import jeremynoesen.hardcorelists.Config;
 import jeremynoesen.hardcorelists.Message;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -24,7 +25,7 @@ public class PvPHandler implements Listener {
     /**
      * hashmap with all players and times
      */
-    private static final HashMap<Player, Integer> pvptimes = new HashMap<>();
+    private static final HashMap<OfflinePlayer, Integer> pvptimes = new HashMap<>();
     
     /**
      * reference to death list file
@@ -36,7 +37,7 @@ public class PvPHandler implements Listener {
      *
      * @return hashmap of player pvp times
      */
-    public static HashMap<Player, Integer> getPvPTimes() {
+    public static HashMap<OfflinePlayer, Integer> getPvPTimes() {
         return pvptimes;
     }
     
@@ -45,7 +46,7 @@ public class PvPHandler implements Listener {
      */
     public static void load() {
         for (String s : players.getConfigurationSection("pvp-times").getKeys(false)) {
-            pvptimes.put(Bukkit.getOfflinePlayer(UUID.fromString(s)).getPlayer(), players.getInt("pvp-times." + s));
+            pvptimes.put(Bukkit.getOfflinePlayer(UUID.fromString(s)), players.getInt("pvp-times." + s));
         }
     }
     
@@ -56,8 +57,8 @@ public class PvPHandler implements Listener {
         for (String s : players.getConfigurationSection("pvp-times").getKeys(false)) {
             players.set("pvp-times." + s, null);
         }
-        for (Player player : pvptimes.keySet()) {
-            players.set("pvp-times." + player.getUniqueId().toString(), pvptimes.get(player));
+        for (OfflinePlayer player : pvptimes.keySet()) {
+            players.set("pvp-times." + player.getUniqueId(), pvptimes.get(player));
         }
         Config.getPlayersConfig().saveConfig();
     }
@@ -68,7 +69,7 @@ public class PvPHandler implements Listener {
      * @param player player to get time for
      * @return time left on their clock
      */
-    public static int getPlayerTime(Player player) {
+    public static int getPlayerTime(OfflinePlayer player) {
         if (pvptimes.containsKey(player) && pvptimes.get(player) > 0) return pvptimes.get(player);
         return 0;
     }
@@ -77,9 +78,9 @@ public class PvPHandler implements Listener {
      * tick a player's time, reduces 1 second
      */
     public static void tickPlayers() {
-        for (Player player : pvptimes.keySet()) {
+        for (OfflinePlayer player : pvptimes.keySet()) {
             if(pvptimes.get(player) != null && player.isOnline()) {
-                if (pvptimes.get(player) == 0) player.sendMessage(Message.PVP_ENABLED);
+                if (pvptimes.get(player) == 0) ((Player) player).sendMessage(Message.PVP_ENABLED);
                 if (pvptimes.get(player) > -1) pvptimes.put(player, pvptimes.get(player) - 1);
             }
         }
@@ -103,7 +104,7 @@ public class PvPHandler implements Listener {
     /**
      * cancels the pvp event if one or the other parties has pvp disabled
      *
-     * @param e
+     * @param e entity damage by entity event
      */
     @EventHandler
     public void onPvP(EntityDamageByEntityEvent e) {
@@ -118,7 +119,7 @@ public class PvPHandler implements Listener {
     /**
      * initialize a new player's clock
      *
-     * @param e
+     * @param e player join event
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {

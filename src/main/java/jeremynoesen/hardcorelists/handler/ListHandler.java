@@ -3,6 +3,7 @@ package jeremynoesen.hardcorelists.handler;
 import jeremynoesen.hardcorelists.Config;
 import jeremynoesen.hardcorelists.Message;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,12 +25,12 @@ public class ListHandler implements Listener {
     /**
      * alive player list
      */
-    private static ArrayList<Player> alive = new ArrayList<>();
+    private static ArrayList<OfflinePlayer> alive = new ArrayList<>();
     
     /**
      * dead player list
      */
-    private static ArrayList<Player> dead = new ArrayList<>();
+    private static ArrayList<OfflinePlayer> dead = new ArrayList<>();
     
     /**
      * reference to player list file
@@ -41,10 +42,10 @@ public class ListHandler implements Listener {
      */
     public static void load() {
         for (String s : players.getStringList("alive")) {
-            alive.add(Bukkit.getPlayer(UUID.fromString(s)));
+            alive.add(Bukkit.getOfflinePlayer(UUID.fromString(s)));
         }
         for (String s : players.getStringList("dead")) {
-            dead.add(Bukkit.getPlayer(UUID.fromString(s)));
+            dead.add(Bukkit.getOfflinePlayer(UUID.fromString(s)));
         }
     }
     
@@ -54,14 +55,14 @@ public class ListHandler implements Listener {
     public static void save() {
         List<String> alivelist = players.getStringList("alive");
         alivelist.clear();
-        for(Player p : alive) {
+        for(OfflinePlayer p : alive) {
             alivelist.add(p.getUniqueId().toString());
         }
         players.set("alive", alivelist);
         
         List<String> deadlist = players.getStringList("dead");
         deadlist.clear();
-        for(Player p : dead) {
+        for(OfflinePlayer p : dead) {
             deadlist.add(p.getUniqueId().toString());
         }
         players.set("dead", deadlist);
@@ -75,7 +76,7 @@ public class ListHandler implements Listener {
      * @param list list to get page pf
      * @return string array formatted with the list of names
      */
-    public static String[] getListPage(int page, ArrayList<Player> list) {
+    public static String[] getListPage(int page, ArrayList<OfflinePlayer> list) {
         int LENGTH = 10;
         int actualPages = (list.size() / LENGTH) + (list.size() % LENGTH > 0 ? 1 : 0);
         if (page > actualPages) page = actualPages;
@@ -95,7 +96,7 @@ public class ListHandler implements Listener {
      *
      * @return list of alive players
      */
-    public static ArrayList<Player> getAlive() {
+    public static ArrayList<OfflinePlayer> getAlive() {
         return alive;
     }
     
@@ -104,14 +105,14 @@ public class ListHandler implements Listener {
      *
      * @return list of dead players
      */
-    public static ArrayList<Player> getDead() {
+    public static ArrayList<OfflinePlayer> getDead() {
         return dead;
     }
     
     /**
      * event called when a player dies, will remove player from alive list and add to dead list
      *
-     * @param e
+     * @param e player death event
      */
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
@@ -123,7 +124,7 @@ public class ListHandler implements Listener {
      * event called when a player joins, will add them to the list of all players, as well as the alive list if they're
      * not dead
      *
-     * @param e
+     * @param e player join event
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
