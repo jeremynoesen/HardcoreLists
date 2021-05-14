@@ -55,14 +55,14 @@ public class ListHandler implements Listener {
     public static void save() {
         List<String> alivelist = players.getStringList("alive");
         alivelist.clear();
-        for(OfflinePlayer p : alive) {
+        for (OfflinePlayer p : alive) {
             alivelist.add(p.getUniqueId().toString());
         }
         players.set("alive", alivelist);
         
         List<String> deadlist = players.getStringList("dead");
         deadlist.clear();
-        for(OfflinePlayer p : dead) {
+        for (OfflinePlayer p : dead) {
             deadlist.add(p.getUniqueId().toString());
         }
         players.set("dead", deadlist);
@@ -117,7 +117,8 @@ public class ListHandler implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         alive.remove(e.getEntity());
-        dead.add(e.getEntity());
+        if (dead.contains(e.getEntity()))
+            dead.add(e.getEntity());
     }
     
     /**
@@ -128,6 +129,6 @@ public class ListHandler implements Listener {
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        if(!dead.contains(e.getPlayer()) && !alive.contains(e.getPlayer())) alive.add(e.getPlayer());
+        if (!dead.contains(e.getPlayer()) && !alive.contains(e.getPlayer())) alive.add(e.getPlayer());
     }
 }
