@@ -92,10 +92,10 @@ public class PvPHandler implements Listener {
      * @param player  player being hurt
      * @param damager damager
      */
-    public static boolean canPvP(Player player, Player damager) {
+    public static boolean canPvP(OfflinePlayer player, OfflinePlayer damager) {
         if ((pvptimes.containsKey(player) && pvptimes.get(player) > 0) ||
                 (pvptimes.containsKey(damager) && pvptimes.get(damager) > 0)) {
-            damager.sendMessage(Message.CANT_HURT);
+            damager.getPlayer().sendMessage(Message.CANT_HURT);
             return false;
         }
         return true;
@@ -109,10 +109,10 @@ public class PvPHandler implements Listener {
     @EventHandler
     public void onPvP(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
-            e.setCancelled(canPvP((Player) e.getEntity(), (Player) e.getDamager()));
+            e.setCancelled(!canPvP((Player) e.getEntity(), (Player) e.getDamager()));
         } else if (e.getDamager() instanceof Projectile && ((Projectile) e.getDamager()).getShooter() instanceof Player
                 && e.getEntity() instanceof Player) {
-            e.setCancelled(canPvP((Player) e.getEntity(), (Player) ((Projectile) e.getDamager()).getShooter()));
+            e.setCancelled(!canPvP((Player) e.getEntity(), (Player) ((Projectile) e.getDamager()).getShooter()));
         }
     }
     
