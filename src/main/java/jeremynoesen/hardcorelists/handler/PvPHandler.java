@@ -79,8 +79,8 @@ public class PvPHandler implements Listener {
      */
     public static void tickPlayers() {
         for (OfflinePlayer player : pvptimes.keySet()) {
-            if(pvptimes.get(player) != null && player.isOnline()) {
-                if (pvptimes.get(player) == 0) ((Player) player).sendMessage(Message.PVP_ENABLED);
+            if(pvptimes.containsKey(player) && player.isOnline()) {
+                if (pvptimes.get(player) == 0) player.getPlayer().sendMessage(Message.PVP_ENABLED);
                 if (pvptimes.get(player) > -1) pvptimes.put(player, pvptimes.get(player) - 1);
             }
         }
