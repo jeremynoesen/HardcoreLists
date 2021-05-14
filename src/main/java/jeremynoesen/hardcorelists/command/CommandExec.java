@@ -5,6 +5,7 @@ import jeremynoesen.hardcorelists.Message;
 import jeremynoesen.hardcorelists.handler.ListHandler;
 import jeremynoesen.hardcorelists.handler.PvPHandler;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -38,7 +39,7 @@ public class CommandExec implements CommandExecutor {
                     if (player.hasPermission("hardcorelists.admin")) {
                         if (args.length > 0) {
                             try {
-                                Player other = Bukkit.getPlayer(args[0]);
+                                OfflinePlayer other = Bukkit.getPlayer(args[0]);
                                 assert other.isOnline();
                                 player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
                                         Message.convertTime(PvPHandler.getPlayerTime(other)))
