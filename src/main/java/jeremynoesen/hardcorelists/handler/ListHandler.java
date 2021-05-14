@@ -117,7 +117,7 @@ public class ListHandler implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         alive.remove(e.getEntity());
-        if (dead.contains(e.getEntity()))
+        if (!dead.contains(e.getEntity()))
             dead.add(e.getEntity());
     }
     
