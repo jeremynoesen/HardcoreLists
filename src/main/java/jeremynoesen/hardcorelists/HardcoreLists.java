@@ -2,11 +2,8 @@ package jeremynoesen.hardcorelists;
 
 import jeremynoesen.hardcorelists.command.CommandExec;
 import jeremynoesen.hardcorelists.command.CommandTabComplete;
-import jeremynoesen.hardcorelists.config.ConfigType;
-import jeremynoesen.hardcorelists.config.Configs;
+import jeremynoesen.hardcorelists.handler.ListHandler;
 import jeremynoesen.hardcorelists.handler.PvPHandler;
-import jeremynoesen.hardcorelists.listener.DeathListener;
-import jeremynoesen.hardcorelists.listener.PVPListener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,14 +27,19 @@ public class HardcoreLists extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        Configs.getConfig(ConfigType.MESSAGE).saveDefaultConfig();
-        Configs.getConfig(ConfigType.TIME).saveDefaultConfig();
-        Configs.getConfig(ConfigType.PLAYERS).saveDefaultConfig();
+        
+        Config.getMessageConfig().saveDefaultConfig();
+        Config.getTimeConfig().saveDefaultConfig();
+        Config.getPlayersConfig().saveDefaultConfig();
+        PvPHandler.load();
+        ListHandler.load();
         Message.reloadMessages();
+        
         PluginManager pm = plugin.getServer().getPluginManager();
-        pm.registerEvents(new DeathListener(), this);
-        pm.registerEvents(new PVPListener(), this);
+        pm.registerEvents(new ListHandler(), plugin);
+        pm.registerEvents(new PvPHandler(), plugin);
         pm.addPermission(new Permission("hardcorelists.admin"));
+        
         CommandExec commandExec = new CommandExec();
         getCommand("hardcorelists").setExecutor(commandExec);
         getCommand("pvptime").setExecutor(commandExec);
@@ -57,10 +59,10 @@ public class HardcoreLists extends JavaPlugin {
      */
     @Override
     public void onDisable() {
+        PvPHandler.save();
+        ListHandler.save();
+        Config.getTimeConfig().saveConfig();
         plugin = null;
-        Configs.getConfig(ConfigType.MESSAGE).saveConfig();
-        Configs.getConfig(ConfigType.TIME).saveConfig();
-        Configs.getConfig(ConfigType.PLAYERS).saveConfig();
     }
     
     /**

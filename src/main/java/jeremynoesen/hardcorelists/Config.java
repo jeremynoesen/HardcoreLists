@@ -1,7 +1,5 @@
-package jeremynoesen.hardcorelists.config;
+package jeremynoesen.hardcorelists;
 
-import jeremynoesen.hardcorelists.HardcoreLists;
-import jeremynoesen.hardcorelists.Message;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -19,27 +17,70 @@ import java.util.logging.Level;
 public class Config {
     
     /**
-     * file representing the config
+     * time config instance
+     */
+    private static Config time = new Config("time.yml");
+    
+    /**
+     * message config instance
+     */
+    private static Config message = new Config("messages.yml");
+    
+    /**
+     * player config instance
+     */
+    private static Config players = new Config("players.yml");
+    
+    /**
+     * file used for the config
      */
     private File configFile;
     
     /**
-     * file loaded in YAML format
+     * file loaded as YAML config file
      */
     private YamlConfiguration YMLConfig;
     
     /**
-     *type of config
+     * config file name
      */
-    private final ConfigType configType;
+    private final String filename;
     
     /**
-     * create a new config with specified type
+     * create a new config with the specified type
      *
-     * @param type config type
+     * @param filename config file name
      */
-    public Config(ConfigType type) {
-        configType = type;
+    public Config(String filename) {
+        this.filename = filename;
+        configFile = new File(HardcoreLists.getInstance().getDataFolder(), filename);
+    }
+    
+    /**
+     * get time config
+     *
+     * @return times config
+     */
+    public static Config getTimeConfig() {
+        return time;
+    }
+    
+    /**
+     * get message config
+     *
+     * @return message config
+     */
+    public static Config getMessageConfig() {
+        return message;
+    }
+    
+    /**
+     * get players config
+     *
+     * @return players config
+     */
+    public static Config getPlayersConfig() {
+        return players;
     }
     
     /**
@@ -47,18 +88,19 @@ public class Config {
      */
     public void reloadConfig() {
         if (configFile == null) {
-            configFile = configType.getFile();
+            configFile = new File(HardcoreLists.getInstance().getDataFolder(), filename);
         }
         
         YMLConfig = YamlConfiguration.loadConfiguration(configFile);
         
-        Reader defConfigStream = new InputStreamReader(configType.getResource(), StandardCharsets.UTF_8);
+        Reader defConfigStream = new InputStreamReader(
+                HardcoreLists.getInstance().getResource(filename), StandardCharsets.UTF_8);
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
         YMLConfig.setDefaults(defConfig);
         YMLConfig.options().copyDefaults(true);
         saveConfig();
         
-        if (configType == ConfigType.MESSAGE) Message.reloadMessages();
+        if (filename.equals("messages.yml")) Message.reloadMessages();
     }
     
     /**
@@ -92,10 +134,10 @@ public class Config {
      */
     public void saveDefaultConfig() {
         if (configFile == null) {
-            configFile = configType.getFile();
+            configFile = new File(HardcoreLists.getInstance().getDataFolder(), filename);
         }
         if (!configFile.exists()) {
-            configType.saveResource();
+            HardcoreLists.getInstance().saveResource(filename, false);
             YMLConfig = YamlConfiguration.loadConfiguration(configFile);
         }
     }

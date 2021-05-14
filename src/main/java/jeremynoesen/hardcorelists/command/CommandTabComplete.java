@@ -30,7 +30,8 @@ public class CommandTabComplete implements TabCompleter {
         
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (label.equalsIgnoreCase("hardcorelists") && player.hasPermission("hardcorelists.admin")) {
+            if ((label.equalsIgnoreCase("hardcorelists") || label.equalsIgnoreCase("hl")) &&
+                    player.hasPermission("hardcorelists.admin")) {
                 if (args.length == 1) {
                     if (args[0].toLowerCase().startsWith("h")) list.add("help");
                     else if (args[0].toLowerCase().startsWith("l")) list.add("list");
@@ -47,13 +48,8 @@ public class CommandTabComplete implements TabCompleter {
                         list.add("set");
                     } else if (args[0].equalsIgnoreCase("list")) {
                         if (args[1].toLowerCase().startsWith("d")) list.add("dead");
-                        else if (args[1].toLowerCase().startsWith("ali")) list.add("alive");
-                        else if (args[1].toLowerCase().startsWith("all")) list.add("all");
-                        else if (args[1].toLowerCase().startsWith("a")) {
-                            list.add("alive");
-                            list.add("all");
-                        } else {
-                            list.add("all");
+                        else if (args[1].toLowerCase().startsWith("a")) list.add("alive");
+                        else {
                             list.add("alive");
                             list.add("dead");
                         }
