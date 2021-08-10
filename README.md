@@ -34,7 +34,7 @@ To install the plugin, download the latest release, put it in your server plugin
 ## Configuration
 The only configurable option the plugin has is located in `time.yml` and is used to adjust how long the PvP timer lasts; however, this should be changed with the command `hardcorelists timer set <time>` to avoid issues. 
 
-There is also `players.yml` which holds the lists of players and their current reamining PvP timer times.
+There is also `players.yml` which holds the lists of players and their current remaining PvP timer times.
 
 For the message configuration, you can use color codes. You can also use the placeholders used per message, as shown in the default configuration. The messages and their names should explain what they are used for.
 
