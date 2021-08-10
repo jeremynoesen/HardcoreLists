@@ -25,8 +25,8 @@ Admins are users with the permission `hardcorelists.admin`. They can use the fol
 The command `hardcorelists reset` can only be used in the console when no players are online. This will delete all player data in the configs.
 
 ## Requirements
-- Spigot 1.13.0 - 1.16.4
-- Java 8
+- Spigot or Paper 1.13 - 1.17
+- Java 8 or higher
 
 ## Installation
 To install the plugin, download the latest release, put it in your server plugins folder, and start or restart your server. This will generate the necessary files for configuration of the plugin, located in `plugins/HardcoreLists`.
