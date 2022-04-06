@@ -25,7 +25,7 @@ Admins are users with the permission `hardcorelists.admin`. They can use the fol
 The command `hardcorelists reset` can only be used in the console when no players are online. This will delete all player data in the configs.
 
 ## Requirements
-- Spigot or Paper 1.13 - 1.17
+- Spigot or Paper 1.13 - 1.18
 - Java 8 or higher
 
 ## Installation
