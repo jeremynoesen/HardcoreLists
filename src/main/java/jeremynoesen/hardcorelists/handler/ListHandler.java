@@ -25,27 +25,27 @@ public class ListHandler implements Listener {
     /**
      * alive player list
      */
-    private static ArrayList<OfflinePlayer> alive = new ArrayList<>();
+    private static final ArrayList<UUID> alive = new ArrayList<>();
     
     /**
      * dead player list
      */
-    private static ArrayList<OfflinePlayer> dead = new ArrayList<>();
+    private static final ArrayList<UUID> dead = new ArrayList<>();
     
     /**
      * reference to player list file
      */
-    private static YamlConfiguration players = Config.getPlayersConfig().getConfig();
+    private static final YamlConfiguration players = Config.getPlayersConfig().getConfig();
     
     /**
      * load the player lists from file
      */
     public static void load() {
         for (String s : players.getStringList("alive")) {
-            alive.add(Bukkit.getOfflinePlayer(UUID.fromString(s)));
+            alive.add(UUID.fromString(s));
         }
         for (String s : players.getStringList("dead")) {
-            dead.add(Bukkit.getOfflinePlayer(UUID.fromString(s)));
+            dead.add(UUID.fromString(s));
         }
     }
     
@@ -55,15 +55,15 @@ public class ListHandler implements Listener {
     public static void save() {
         List<String> alivelist = players.getStringList("alive");
         alivelist.clear();
-        for (OfflinePlayer p : alive) {
-            alivelist.add(p.getUniqueId().toString());
+        for (UUID p : alive) {
+            alivelist.add(p.toString());
         }
         players.set("alive", alivelist);
         
         List<String> deadlist = players.getStringList("dead");
         deadlist.clear();
-        for (OfflinePlayer p : dead) {
-            deadlist.add(p.getUniqueId().toString());
+        for (UUID p : dead) {
+            deadlist.add(p.toString());
         }
         players.set("dead", deadlist);
         Config.getPlayersConfig().saveConfig();
@@ -76,14 +76,14 @@ public class ListHandler implements Listener {
      * @param list list to get page pf
      * @return string array formatted with the list of names
      */
-    public static String[] getListPage(int page, ArrayList<OfflinePlayer> list) {
+    public static String[] getListPage(int page, ArrayList<UUID> list) {
         int LENGTH = 10;
         int actualPages = (list.size() / LENGTH) + (list.size() % LENGTH > 0 ? 1 : 0);
         if (page > actualPages) page = actualPages;
         String[] stringList = new String[Math.min(LENGTH, list.size())];
         for (int i = 0; i < stringList.length; i++) {
             int shift = i + (LENGTH * (page - 1));
-            String name = list.get(shift).getName();
+            String name = Bukkit.getOfflinePlayer(list.get(shift)).getName();
             stringList[i] = Message.LIST_FORMAT
                     .replace("$POS$", Integer.toString(shift + 1))
                     .replace("$PLAYER$", name);
@@ -96,7 +96,7 @@ public class ListHandler implements Listener {
      *
      * @return list of alive players
      */
-    public static ArrayList<OfflinePlayer> getAlive() {
+    public static ArrayList<UUID> getAlive() {
         return alive;
     }
     
@@ -105,7 +105,7 @@ public class ListHandler implements Listener {
      *
      * @return list of dead players
      */
-    public static ArrayList<OfflinePlayer> getDead() {
+    public static ArrayList<UUID> getDead() {
         return dead;
     }
     
@@ -116,9 +116,9 @@ public class ListHandler implements Listener {
      */
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        alive.remove(e.getEntity());
-        if (!dead.contains(e.getEntity()))
-            dead.add(e.getEntity());
+        alive.remove(e.getEntity().getUniqueId());
+        if (!dead.contains(e.getEntity().getUniqueId()))
+            dead.add(e.getEntity().getUniqueId());
     }
     
     /**
@@ -129,6 +129,7 @@ public class ListHandler implements Listener {
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        if (!dead.contains(e.getPlayer()) && !alive.contains(e.getPlayer())) alive.add(e.getPlayer());
+        if (!dead.contains(e.getPlayer().getUniqueId()) && !alive.contains(e.getPlayer().getUniqueId()))
+            alive.add(e.getPlayer().getUniqueId());
     }
 }
