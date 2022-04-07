@@ -44,19 +44,19 @@ public class CommandExec implements CommandExecutor {
                                 OfflinePlayer other = Bukkit.getPlayer(args[0]);
                                 assert other.isOnline();
                                 player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                        Message.convertTime(PvPHandler.getPlayerTime(other)))
+                                        Message.convertTime(PvPHandler.getPlayerTime(other.getUniqueId())))
                                         .replace("$PLAYER$", other.getName()));
                             } catch (Exception e) {
                                 player.sendMessage(Message.PLAYER_OFFLINE);
                             }
                         } else {
                             player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                    Message.convertTime(PvPHandler.getPlayerTime(player)))
+                                    Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId())))
                                     .replace("$PLAYER$", "You"));
                         }
                     } else {
                         player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                Message.convertTime(PvPHandler.getPlayerTime(player)))
+                                Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId())))
                                 .replace("$PLAYER$", "You"));
                     }
                     break;
