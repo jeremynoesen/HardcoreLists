@@ -66,6 +66,9 @@ public class CommandExec implements CommandExecutor {
                         if (args.length > 0) {
                             switch (args[0].toLowerCase()) {
                                 case "reload":
+                                    PvPHandler.save();
+                                    ListHandler.save();
+                                    Config.getTimeConfig().saveConfig();
                                     Config.getTimeConfig().reloadConfig();
                                     Config.getMessageConfig().reloadConfig();
                                     Config.getPlayersConfig().reloadConfig();
