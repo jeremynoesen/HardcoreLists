@@ -29,7 +29,9 @@ The command `hardcorelists reset` can only be used in the console when no player
 - Java 8 or higher
 
 ## Installation
-To install the plugin, download the latest release, put it in your server plugins folder, and start or restart your server. This will generate the necessary files for configuration of the plugin, located in `plugins/HardcoreLists`.
+1. Download the latest release.
+2. Put the jar in your plugins folder.
+3. Start or restart your server.
 
 ## Configuration
 The only configurable option the plugin has is located in `time.yml` and is used to adjust how long the PvP timer lasts; however, this should be changed with the command `hardcorelists timer set <time>` to avoid issues. 
@@ -39,7 +41,11 @@ There is also `players.yml` which holds the lists of players and their current r
 For the message configuration, you can use color codes. You can also use the placeholders used per message, as shown in the default configuration. The messages and their names should explain what they are used for.
 
 ## Building
-If you wish to build from source, a `build.gradle` is included to create the jar, as well as get dependencies if you import the project into your IDE. With this, you can run `./gradlew shadowJar` to generate `/build/libs/HardcoreLists.jar`.
+1. Clone or download this repository.
+2. Run `./gradlew shadowJar` in the directory of the project.
+3. `/build/libs/HardcoreLists.jar` should have been generated.
+
+You can also grab `HardcoreLists.jar` from the latest releases.
 
 ## Notice
 This project is no longer in development.
