@@ -1,9 +1,9 @@
-package jeremynoesen.hardcorelists;
+package xyz.jeremynoesen.hardcorelists;
 
-import jeremynoesen.hardcorelists.command.CommandExec;
-import jeremynoesen.hardcorelists.command.CommandTabComplete;
-import jeremynoesen.hardcorelists.handler.ListHandler;
-import jeremynoesen.hardcorelists.handler.PvPHandler;
+import xyz.jeremynoesen.hardcorelists.command.CommandExec;
+import xyz.jeremynoesen.hardcorelists.command.CommandTabComplete;
+import xyz.jeremynoesen.hardcorelists.handler.ListHandler;
+import xyz.jeremynoesen.hardcorelists.handler.PvPHandler;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;

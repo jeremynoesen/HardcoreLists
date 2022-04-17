@@ -39,7 +39,7 @@ There is also `players.yml` which holds the lists of players and their current r
 For the message configuration, you can use color codes. You can also use the placeholders used per message, as shown in the default configuration. The messages and their names should explain what they are used for.
 
 ## Building
-If you wish to build from source, a `build.gradle` is included to create the jar, as well as get dependencies if you import the project into your IDE. With this, you can run `./gradlew build` to generate `HardcoreLists.jar`.
+If you wish to build from source, a `build.gradle` is included to create the jar, as well as get dependencies if you import the project into your IDE. With this, you can run `./gradlew shadowJar` to generate `HardcoreLists.jar`.
 
 ## Notice
 This project is no longer in development.
