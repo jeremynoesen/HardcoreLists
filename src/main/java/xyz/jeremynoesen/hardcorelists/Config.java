@@ -1,4 +1,4 @@
-package jeremynoesen.hardcorelists;
+package xyz.jeremynoesen.hardcorelists;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 

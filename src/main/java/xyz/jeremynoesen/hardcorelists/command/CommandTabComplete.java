@@ -1,4 +1,4 @@
-package jeremynoesen.hardcorelists.command;
+package xyz.jeremynoesen.hardcorelists.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

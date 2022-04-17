@@ -1,9 +1,8 @@
-package jeremynoesen.hardcorelists.handler;
+package xyz.jeremynoesen.hardcorelists.handler;
 
-import jeremynoesen.hardcorelists.Config;
-import jeremynoesen.hardcorelists.Message;
+import xyz.jeremynoesen.hardcorelists.Config;
+import xyz.jeremynoesen.hardcorelists.Message;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;

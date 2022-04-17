@@ -1,9 +1,9 @@
-package jeremynoesen.hardcorelists.command;
+package xyz.jeremynoesen.hardcorelists.command;
 
-import jeremynoesen.hardcorelists.Config;
-import jeremynoesen.hardcorelists.Message;
-import jeremynoesen.hardcorelists.handler.ListHandler;
-import jeremynoesen.hardcorelists.handler.PvPHandler;
+import xyz.jeremynoesen.hardcorelists.Config;
+import xyz.jeremynoesen.hardcorelists.Message;
+import xyz.jeremynoesen.hardcorelists.handler.ListHandler;
+import xyz.jeremynoesen.hardcorelists.handler.PvPHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
