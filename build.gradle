@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'xyz.jeremynoesen.hardcorelists'
-version '1.0.3'
+version '1.0.4'
 
 compileJava.options.encoding = 'UTF-8'
 
