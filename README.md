@@ -11,11 +11,8 @@ This project was created for another server, due to the lack of very simple PvP 
 ## Usage
 
 ### Player Commands
-All players are able to use `/pvptime`, which shows their remaining PvP timer time.
-
-### Admin Commands
-Admins are users with the permission `hardcorelists.admin`. They can use the following commands:
-- `/pvptime <player>` - Shows the remaining PvP timer time for any player
+- `/pvptime` - Shows a player's own remaining PvP time 
+- `/pvptime <player>` - Shows the remaining PvP time for any player
 - `/hardcorelists help` - Show plugin help
 - `/hardcorelists reload` - Reload all configurations for the plugin
 - `/hardcorelists timer <seconds>` - Change the length of the PvP timer
@@ -39,6 +36,16 @@ The only configurable option the plugin has is located in `time.yml` and is used
 There is also `players.yml` which holds the lists of players and their current remaining PvP timer times.
 
 For the message configuration, you can use color codes. You can also use the placeholders used per message, as shown in the default configuration. The messages and their names should explain what they are used for.
+
+### Permissions
+- `hardcorelists.pvptime.self` - Allow players to check their own pvp timer
+- `hardcorelists.pvptime.others` - Allow players to check other players' pvp timers
+- `hardcorelists.help` - Allow using the help command
+- `hardcorelists.reload` - Allow using the reload command
+- `hardcorelists.timer` - Allow changing the timer
+- `hardcorelists.list.dead` - Allow listing all dead players
+- `hardcorelists.list.alive` - Allow listing all alive players
+- `hardcorelists.reset` - Show the reset command in the help message
 
 ## Building
 1. Clone or download this repository.
