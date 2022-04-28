@@ -63,27 +63,27 @@ public class Message {
         ArrayList<String> help = new ArrayList<>();
 
         help.add("");
-        help.add(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "--------[" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD +
+        help.add(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------[" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD +
                 "Hardcore" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "Lists" +
-                ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
-                + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]--------");
+                ChatColor.GRAY + "" + ChatColor.BOLD + " Help"
+                + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]----------");
 
         if (player.hasPermission("hardcorelists.pvptime.self"))
             help.add(ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View your remaining PVP time");
         if (player.hasPermission("hardcorelists.pvptime.others"))
-            help.add(ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View other player's remaining PVP time");
+            help.add(ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View other's remaining PVP time");
         if (player.hasPermission("hardcorelists.help"))
             help.add(ChatColor.GRAY + "/hardcorelists help" + ChatColor.WHITE + ": Show plugin help");
         if (player.hasPermission("hardcorelists.reload"))
             help.add(ChatColor.GRAY + "/hardcorelists reload" + ChatColor.WHITE + ": Reload plugin and configs");
         if (player.hasPermission("hardcorelists.timer"))
-            help.add(ChatColor.GRAY + "/hardcorelists timer <seconds>" + ChatColor.WHITE + ": Update the duration of pvp timer");
+            help.add(ChatColor.GRAY + "/hardcorelists timer <seconds>" + ChatColor.WHITE + ": Update the pvp timer");
         if (player.hasPermission("hardcorelists.list.dead") || player.hasPermission("hardcorelists.list.alive"))
-            help.add(ChatColor.GRAY + "/hardcorelists list <dead/alive> <page>" + ChatColor.WHITE + ": List dead or alive players");
+            help.add(ChatColor.GRAY + "/hardcorelists list <dead/alive> <page>" + ChatColor.WHITE + ": List players");
         if (player.hasPermission("hardcorelists.reset"))
             help.add(ChatColor.GRAY + "hardcorelists reset" + ChatColor.WHITE + ": Reset data (console only)");
 
-        help.add("----------------------------------");
+        help.add(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "--------------------------------------");
         help.add("");
 
         String[] out = new String[help.size()];
