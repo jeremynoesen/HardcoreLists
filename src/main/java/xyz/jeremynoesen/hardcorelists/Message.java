@@ -27,7 +27,6 @@ public class Message {
     public static String LIST_FORMAT;
     public static String DEAD_LIST_TITLE;
     public static String ALIVE_LIST_TITLE;
-    public static String ALL_LIST_TITLE;
     public static String RESET;
     public static String CANT_RESET;
 
@@ -48,7 +47,6 @@ public class Message {
         LIST_FORMAT = format(messageConfig.getConfig().getString("LIST_FORMAT"));
         DEAD_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("DEAD_LIST_TITLE"));
         ALIVE_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALIVE_LIST_TITLE"));
-        ALL_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALL_LIST_TITLE"));
         RESET = PREFIX + format(messageConfig.getConfig().getString("RESET"));
         CANT_RESET = PREFIX + format(messageConfig.getConfig().getString("CANT_RESET"));
     }
