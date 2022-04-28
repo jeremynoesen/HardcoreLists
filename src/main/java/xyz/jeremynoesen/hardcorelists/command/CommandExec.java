@@ -1,9 +1,5 @@
 package xyz.jeremynoesen.hardcorelists.command;
 
-import xyz.jeremynoesen.hardcorelists.Config;
-import xyz.jeremynoesen.hardcorelists.Message;
-import xyz.jeremynoesen.hardcorelists.handler.ListHandler;
-import xyz.jeremynoesen.hardcorelists.handler.PvPHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -11,6 +7,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import xyz.jeremynoesen.hardcorelists.Config;
+import xyz.jeremynoesen.hardcorelists.Message;
+import xyz.jeremynoesen.hardcorelists.handler.ListHandler;
+import xyz.jeremynoesen.hardcorelists.handler.PvPHandler;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * @author Jeremy Noesen
  */
 public class CommandExec implements CommandExecutor {
-    
+
     /**
      * called when commands are run
      *
@@ -32,40 +32,38 @@ public class CommandExec implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
-        
+
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
             switch (label.toLowerCase()) {
                 case "pvptime":
                 case "pt":
-                    if (player.hasPermission("hardcorelists.admin")) {
-                        if (args.length > 0) {
+                    if (args.length > 0) {
+                        if (player.hasPermission("hardcorelists.pvptime.others")) {
                             try {
                                 OfflinePlayer other = Bukkit.getPlayer(args[0]);
                                 assert other.isOnline();
                                 player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                        Message.convertTime(PvPHandler.getPlayerTime(other.getUniqueId())))
+                                                Message.convertTime(PvPHandler.getPlayerTime(other.getUniqueId())))
                                         .replace("$PLAYER$", other.getName()));
                             } catch (Exception e) {
                                 player.sendMessage(Message.PLAYER_OFFLINE);
                             }
-                        } else {
-                            player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                    Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId())))
-                                    .replace("$PLAYER$", "You"));
-                        }
+                        } else player.sendMessage(Message.NO_PERMISSION);
                     } else {
-                        player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId())))
-                                .replace("$PLAYER$", "You"));
+                        if (player.hasPermission("hardcorelists.pvptime.self")) {
+                            player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
+                                            Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId())))
+                                    .replace("$PLAYER$", "You"));
+                        } else player.sendMessage(Message.NO_PERMISSION);
                     }
                     break;
                 case "hardcorelists":
                 case "hl":
-                    if (player.hasPermission("hardcorelists.admin")) {
-                        if (args.length > 0) {
-                            switch (args[0].toLowerCase()) {
-                                case "reload":
+                    if (args.length > 0) {
+                        switch (args[0].toLowerCase()) {
+                            case "reload":
+                                if (player.hasPermission("hardcorelists.reload")) {
                                     PvPHandler.save();
                                     ListHandler.save();
                                     Config.getTimeConfig().saveConfig();
@@ -76,65 +74,73 @@ public class CommandExec implements CommandExecutor {
                                     ListHandler.load();
                                     Message.reloadMessages();
                                     player.sendMessage(Message.RELOAD);
-                                    break;
-                                case "reset":
+                                } else player.sendMessage(Message.NO_PERMISSION);
+                                break;
+                            case "reset":
+                                if (player.hasPermission("hardcorelists.reset")) {
                                     player.sendMessage(Message.CANT_RESET);
-                                    break;
-                                case "help":
-                                    player.sendMessage(Message.HELP);
-                                    break;
-                                case "timer":
-                                    if (args.length > 2 && args[1] != null && args[1].equalsIgnoreCase("set") && args[2] != null) {
-                                        try {
-                                            Config.getTimeConfig().getConfig()
-                                                    .set("pvp-countdown-seconds", Integer.valueOf(args[2]));
-                                            player.sendMessage(Message.SET_TIME.replace("$TIME$",
-                                                    Message.convertTime(Integer.valueOf(args[2]))));
-                                        } catch (Exception e) {
-                                            player.sendMessage(Message.UNKNOWN_COMMAND);
-                                        }
-                                    } else {
-                                        player.sendMessage(Message.UNKNOWN_COMMAND);
-                                    }
-                                    break;
-                                case "list":
+                                } else player.sendMessage(Message.NO_PERMISSION);
+                                break;
+                            case "help":
+                                if (player.hasPermission("hardcorelists.help")) {
+                                    player.sendMessage(Message.getHelpMessage(player));
+                                } else player.sendMessage(Message.NO_PERMISSION);
+                                break;
+                            case "timer":
+                                if (player.hasPermission("hardcorelists.timer")) {
                                     if (args.length > 1 && args[1] != null) {
                                         try {
-                                            int page = 1;
-                                            if (args.length > 2 && args[2] != null) page = Integer.parseInt(args[2]);
-                                            switch (args[1].toLowerCase()) {
-                                                case "dead":
+                                            Config.getTimeConfig().getConfig()
+                                                    .set("pvp-countdown-seconds", Integer.valueOf(args[1]));
+                                            player.sendMessage(Message.SET_TIME.replace("$TIME$",
+                                                    Message.convertTime(Integer.valueOf(args[1]))));
+                                        } catch (Exception e) {
+                                            player.sendMessage(Message.UNKNOWN_ARGS);
+                                        }
+                                    } else {
+                                        player.sendMessage(Message.UNKNOWN_ARGS);
+                                    }
+                                } else player.sendMessage(Message.NO_PERMISSION);
+                                break;
+                            case "list":
+                                if (args.length > 1 && args[1] != null) {
+                                    try {
+                                        int page = 1;
+                                        if (args.length > 2 && args[2] != null) page = Integer.parseInt(args[2]);
+                                        switch (args[1].toLowerCase()) {
+                                            case "dead":
+                                                if (player.hasPermission("hardcorelists.list.dead")) {
                                                     player.sendMessage(Message.DEAD_LIST_TITLE);
                                                     player.sendMessage(ListHandler.getListPage(
                                                             page, ListHandler.getDead()));
-                                                    break;
-                                                case "alive":
+                                                } else player.sendMessage(Message.NO_PERMISSION);
+                                                break;
+                                            case "alive":
+                                                if (player.hasPermission("hardcorelists.list.alive")) {
                                                     player.sendMessage(Message.ALIVE_LIST_TITLE);
                                                     player.sendMessage(ListHandler.getListPage(
                                                             page, ListHandler.getAlive()));
-                                                    break;
-                                                default:
-                                                    player.sendMessage(Message.UNKNOWN_COMMAND);
-                                            }
-                                        } catch (Exception e) {
-                                            player.sendMessage(Message.UNKNOWN_COMMAND);
+                                                } else player.sendMessage(Message.NO_PERMISSION);
+                                                break;
+                                            default:
+                                                player.sendMessage(Message.UNKNOWN_ARGS);
                                         }
-                                    } else {
-                                        player.sendMessage(Message.UNKNOWN_COMMAND);
+                                    } catch (Exception e) {
+                                        player.sendMessage(Message.UNKNOWN_ARGS);
                                     }
-                                    break;
-                                default:
-                                    player.sendMessage(Message.UNKNOWN_COMMAND);
-                            }
-                        } else {
-                            player.sendMessage(Message.UNKNOWN_COMMAND);
+                                } else {
+                                    player.sendMessage(Message.UNKNOWN_ARGS);
+                                }
+                                break;
+                            default:
+                                player.sendMessage(Message.UNKNOWN_ARGS);
                         }
                     } else {
-                        player.sendMessage(Message.NO_PERMISSION);
+                        player.sendMessage(Message.UNKNOWN_ARGS);
                     }
                     break;
                 default:
-                    player.sendMessage(Message.UNKNOWN_COMMAND);
+                    player.sendMessage(Message.UNKNOWN_ARGS);
             }
         } else if (commandSender instanceof ConsoleCommandSender) {
             ConsoleCommandSender console = (ConsoleCommandSender) commandSender;
@@ -159,7 +165,7 @@ public class CommandExec implements CommandExecutor {
                     console.sendMessage(Message.RESET);
                 }
             } else {
-                console.sendMessage(Message.UNKNOWN_COMMAND);
+                console.sendMessage(Message.UNKNOWN_ARGS);
             }
         }
         return true;
