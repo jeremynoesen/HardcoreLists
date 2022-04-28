@@ -1,6 +1,9 @@
 package xyz.jeremynoesen.hardcorelists;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
 
 /**
  * All messages used within the plugin
@@ -8,9 +11,9 @@ import org.bukkit.ChatColor;
  * @author Jeremy Noesen
  */
 public class Message {
-    
+
     private static final Config messageConfig = Config.getMessageConfig();
-    
+
     public static String PREFIX;
     public static String PVP_ENABLED;
     public static String PVP_DISABLED;
@@ -27,8 +30,7 @@ public class Message {
     public static String ALL_LIST_TITLE;
     public static String RESET;
     public static String CANT_RESET;
-    public static String[] HELP;
-    
+
     /**
      * loads/reloads messages from file
      */
@@ -49,24 +51,45 @@ public class Message {
         ALL_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALL_LIST_TITLE"));
         RESET = PREFIX + format(messageConfig.getConfig().getString("RESET"));
         CANT_RESET = PREFIX + format(messageConfig.getConfig().getString("CANT_RESET"));
-        
-        HELP = new String[]{ //todo add more perms, perm based help
-                "",
-                ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "--------[" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD +
-                        "Hardcore" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "Lists" +
-                        ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
-                        + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]--------",
-                ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View time remaining on an online player's pvp timer",
-                ChatColor.GRAY + "/hardcorelists help" + ChatColor.WHITE + ": Show plugin help",
-                ChatColor.GRAY + "/hardcorelists reload" + ChatColor.WHITE + ": Reload all config and data files for the plugin",
-                ChatColor.GRAY + "/hardcorelists timer <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
-                ChatColor.GRAY + "/hardcorelists list <dead/alive> <page>" + ChatColor.WHITE + ": Get players in a list by page",
-                ChatColor.GRAY + "/hardcorelists reset" + ChatColor.WHITE + ": Reset data, can only be run by console when nobody is online",
-                ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------------------------------",
-                ""
-        };
     }
-    
+
+    /**
+     * get the help message to send to a player, only showing what they are allowed to run
+     *
+     * @param player player viewing help message
+     * @return help message
+     */
+    public static String[] getHelpMessage(Player player) {
+        ArrayList<String> help = new ArrayList<>();
+
+        help.add("");
+        help.add(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "--------[" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD +
+                "Hardcore" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "Lists" +
+                ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
+                + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]--------");
+
+        if (player.hasPermission("hardcorelists.pvptime.self"))
+            help.add(ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View your remaining PVP time");
+        if (player.hasPermission("hardcorelists.pvptime.others"))
+            help.add(ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View other player's remaining PVP time");
+        if (player.hasPermission("hardcorelists.help"))
+            help.add(ChatColor.GRAY + "/hardcorelists help" + ChatColor.WHITE + ": Show plugin help");
+        if (player.hasPermission("hardcorelists.reload"))
+            help.add(ChatColor.GRAY + "/hardcorelists reload" + ChatColor.WHITE + ": Reload plugin and configs");
+        if (player.hasPermission("hardcorelists.timer"))
+            help.add(ChatColor.GRAY + "/hardcorelists timer <seconds>" + ChatColor.WHITE + ": Update the duration of pvp timer");
+        if (player.hasPermission("hardcorelists.list.dead") || player.hasPermission("hardcorelists.list.alive"))
+            help.add(ChatColor.GRAY + "/hardcorelists list <dead/alive> <page>" + ChatColor.WHITE + ": List dead or alive players");
+        if (player.hasPermission("hardcorelists.reset"))
+            help.add(ChatColor.GRAY + "hardcorelists reset" + ChatColor.WHITE + ": Reset data (console only)");
+
+        help.add("----------------------------------");
+        help.add("");
+
+        String[] out = new String[help.size()];
+        return help.toArray(out);
+    }
+
     /**
      * Apply color codes and line breaks to a message
      *
@@ -76,7 +99,7 @@ public class Message {
     public static String format(String msg) {
         return ChatColor.translateAlternateColorCodes('&', msg);
     }
-    
+
     /**
      * convert a time in seconds to a string for messages in minutes and seconds
      *

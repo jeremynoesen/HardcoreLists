@@ -36,11 +36,22 @@ public class HardcoreLists extends JavaPlugin {
         Message.reloadMessages();
         
         PluginManager pm = plugin.getServer().getPluginManager();
+
         pm.registerEvents(new ListHandler(), plugin);
         pm.registerEvents(new PvPHandler(), plugin);
-        pm.addPermission(new Permission("hardcorelists.admin"));
-        
+
+        pm.addPermission(new Permission("hardcorelists.pvptime.self"));
+        pm.addPermission(new Permission("hardcorelists.pvptime.others"));
+        pm.addPermission(new Permission("hardcorelists.help"));
+        pm.addPermission(new Permission("hardcorelists.reload"));
+        pm.addPermission(new Permission("hardcorelists.timer"));
+        pm.addPermission(new Permission("hardcorelists.list.dead"));
+        pm.addPermission(new Permission("hardcorelists.list.alive"));
+        pm.addPermission(new Permission("hardcorelists.reset"));
+
+
         CommandExec commandExec = new CommandExec();
+
         getCommand("hardcorelists").setExecutor(commandExec);
         getCommand("pvptime").setExecutor(commandExec);
         getCommand("hardcorelists").setTabCompleter(new CommandTabComplete());
