@@ -31,7 +31,7 @@ This project was created for another server, due to the lack of very simple PvP 
 3. Start or restart your server.
 
 ## Configuration
-The only configurable option the plugin has is located in `time.yml` and is used to adjust how long the PvP timer lasts; however, this should be changed with the command `hardcorelists timer set <time>` to avoid issues. 
+The only configurable option the plugin has is located in `time.yml` and is used to adjust how long the PvP timer lasts; however, this should be changed with the command `hardcorelists timer <time>` to avoid issues. 
 
 There is also `players.yml` which holds the lists of players and their current remaining PvP timer times.
 
