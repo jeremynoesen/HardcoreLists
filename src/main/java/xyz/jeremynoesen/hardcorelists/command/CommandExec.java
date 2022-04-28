@@ -84,17 +84,17 @@ public class CommandExec implements CommandExecutor {
                                     player.sendMessage(Message.HELP);
                                     break;
                                 case "timer":
-                                    if (args.length > 2 && args[1] != null && args[1].equalsIgnoreCase("set") && args[2] != null) {
+                                    if (args.length > 1 && args[1] != null) {
                                         try {
                                             Config.getTimeConfig().getConfig()
                                                     .set("pvp-countdown-seconds", Integer.valueOf(args[2]));
                                             player.sendMessage(Message.SET_TIME.replace("$TIME$",
-                                                    Message.convertTime(Integer.valueOf(args[2]))));
+                                                    Message.convertTime(Integer.valueOf(args[1]))));
                                         } catch (Exception e) {
-                                            player.sendMessage(Message.UNKNOWN_COMMAND);
+                                            player.sendMessage(Message.UNKNOWN_ARGS);
                                         }
                                     } else {
-                                        player.sendMessage(Message.UNKNOWN_COMMAND);
+                                        player.sendMessage(Message.UNKNOWN_ARGS);
                                     }
                                     break;
                                 case "list":
@@ -114,27 +114,27 @@ public class CommandExec implements CommandExecutor {
                                                             page, ListHandler.getAlive()));
                                                     break;
                                                 default:
-                                                    player.sendMessage(Message.UNKNOWN_COMMAND);
+                                                    player.sendMessage(Message.UNKNOWN_ARGS);
                                             }
                                         } catch (Exception e) {
-                                            player.sendMessage(Message.UNKNOWN_COMMAND);
+                                            player.sendMessage(Message.UNKNOWN_ARGS);
                                         }
                                     } else {
-                                        player.sendMessage(Message.UNKNOWN_COMMAND);
+                                        player.sendMessage(Message.UNKNOWN_ARGS);
                                     }
                                     break;
                                 default:
-                                    player.sendMessage(Message.UNKNOWN_COMMAND);
+                                    player.sendMessage(Message.UNKNOWN_ARGS);
                             }
                         } else {
-                            player.sendMessage(Message.UNKNOWN_COMMAND);
+                            player.sendMessage(Message.UNKNOWN_ARGS);
                         }
                     } else {
                         player.sendMessage(Message.NO_PERMISSION);
                     }
                     break;
                 default:
-                    player.sendMessage(Message.UNKNOWN_COMMAND);
+                    player.sendMessage(Message.UNKNOWN_ARGS);
             }
         } else if (commandSender instanceof ConsoleCommandSender) {
             ConsoleCommandSender console = (ConsoleCommandSender) commandSender;
@@ -159,7 +159,7 @@ public class CommandExec implements CommandExecutor {
                     console.sendMessage(Message.RESET);
                 }
             } else {
-                console.sendMessage(Message.UNKNOWN_COMMAND);
+                console.sendMessage(Message.UNKNOWN_ARGS);
             }
         }
         return true;

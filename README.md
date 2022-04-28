@@ -16,9 +16,9 @@ All players are able to use `/pvptime`, which shows their remaining PvP timer ti
 ### Admin Commands
 Admins are users with the permission `hardcorelists.admin`. They can use the following commands:
 - `/pvptime <player>` - Shows the remaining PvP timer time for any player
+- `/hardcorelists help` - Show plugin help
 - `/hardcorelists reload` - Reload all configurations for the plugin
-- `/hardcorelists help` - Show the help message
-- `/hardcorelists timer set <seconds>` - Change the length of the PvP timer
+- `/hardcorelists timer <seconds>` - Change the length of the PvP timer
 - `/hardcorelists list <dead/alive> <page>` - Show a page of the dead or alive player lists
 
 ### Console Commands

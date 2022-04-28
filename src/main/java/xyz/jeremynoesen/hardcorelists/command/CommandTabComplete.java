@@ -44,9 +44,7 @@ public class CommandTabComplete implements TabCompleter {
                         list.add("timer");
                     }
                 } else if (args.length == 2) {
-                    if (args[0].equalsIgnoreCase("timer")) {
-                        list.add("set");
-                    } else if (args[0].equalsIgnoreCase("list")) {
+                    if (args[0].equalsIgnoreCase("list")) {
                         if (args[1].toLowerCase().startsWith("d")) list.add("dead");
                         else if (args[1].toLowerCase().startsWith("a")) list.add("alive");
                         else {
