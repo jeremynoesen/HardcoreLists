@@ -19,7 +19,7 @@ This project was created for another server, due to the lack of very simple PvP 
 - `/hardcorelists list <dead/alive> <page>` - Show a page of the dead or alive player lists
 
 ### Console Commands
-The command `hardcorelists reset` can only be used in the console when no players are online. This will delete all player data in the configs.
+- `hardcorelists reset` - This will delete all player data in the configs. Can only run when no players are online.
 
 ## Requirements
 - Spigot or Paper 1.13 - 1.18
