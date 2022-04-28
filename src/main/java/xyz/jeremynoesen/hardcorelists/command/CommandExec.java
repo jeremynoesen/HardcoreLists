@@ -91,7 +91,7 @@ public class CommandExec implements CommandExecutor {
                                     if (args.length > 1 && args[1] != null) {
                                         try {
                                             Config.getTimeConfig().getConfig()
-                                                    .set("pvp-countdown-seconds", Integer.valueOf(args[2]));
+                                                    .set("pvp-countdown-seconds", Integer.valueOf(args[1]));
                                             player.sendMessage(Message.SET_TIME.replace("$TIME$",
                                                     Message.convertTime(Integer.valueOf(args[1]))));
                                         } catch (Exception e) {
