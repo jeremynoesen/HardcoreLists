@@ -16,7 +16,7 @@ public class Message {
     public static String PVP_DISABLED;
     public static String CANT_HURT;
     public static String CHECK_TIME;
-    public static String UNKNOWN_COMMAND;
+    public static String UNKNOWN_ARGS;
     public static String NO_PERMISSION;
     public static String RELOAD;
     public static String SET_TIME;
@@ -38,7 +38,7 @@ public class Message {
         PVP_DISABLED = PREFIX + format(messageConfig.getConfig().getString("PVP_DISABLED"));
         CANT_HURT = PREFIX + format(messageConfig.getConfig().getString("CANT_HURT"));
         CHECK_TIME = PREFIX + format(messageConfig.getConfig().getString("CHECK_TIME"));
-        UNKNOWN_COMMAND = PREFIX + format(messageConfig.getConfig().getString("UNKNOWN_COMMAND"));
+        UNKNOWN_ARGS = PREFIX + format(messageConfig.getConfig().getString("UNKNOWN_ARGS"));
         NO_PERMISSION = PREFIX + format(messageConfig.getConfig().getString("NO_PERMISSION"));
         RELOAD = PREFIX + format(messageConfig.getConfig().getString("RELOAD"));
         SET_TIME = PREFIX + format(messageConfig.getConfig().getString("SET_TIME"));
@@ -50,15 +50,16 @@ public class Message {
         RESET = PREFIX + format(messageConfig.getConfig().getString("RESET"));
         CANT_RESET = PREFIX + format(messageConfig.getConfig().getString("CANT_RESET"));
         
-        HELP = new String[]{
+        HELP = new String[]{ //todo add more perms, perm based help
                 "",
                 ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "--------[" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD +
                         "Hardcore" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "Lists" +
                         ChatColor.GRAY + "" + ChatColor.BOLD + "Help"
                         + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]--------",
                 ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View time remaining on an online player's pvp timer",
+                ChatColor.GRAY + "/hardcorelists help" + ChatColor.WHITE + ": Show plugin help",
                 ChatColor.GRAY + "/hardcorelists reload" + ChatColor.WHITE + ": Reload all config and data files for the plugin",
-                ChatColor.GRAY + "/hardcorelists timer set <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
+                ChatColor.GRAY + "/hardcorelists timer <seconds>" + ChatColor.WHITE + ": Update the duration of the starting pvp timer",
                 ChatColor.GRAY + "/hardcorelists list <dead/alive> <page>" + ChatColor.WHITE + ": Get players in a list by page",
                 ChatColor.GRAY + "/hardcorelists reset" + ChatColor.WHITE + ": Reset data, can only be run by console when nobody is online",
                 ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------------------------------",
