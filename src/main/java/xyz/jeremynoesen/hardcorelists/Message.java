@@ -30,6 +30,15 @@ public class Message {
     public static String ALL_LIST_TITLE;
     public static String RESET;
     public static String CANT_RESET;
+    public static String HELP_HEADER;
+    public static String HELP_PVPTIME_SELF;
+    public static String HELP_PVPTIME_OTHERS;
+    public static String HELP_HELP;
+    public static String HELP_RELOAD;
+    public static String HELP_TIMER;
+    public static String HELP_LIST;
+    public static String HELP_RESET;
+    public static String HELP_FOOTER;
 
     /**
      * loads/reloads messages from file
@@ -51,6 +60,15 @@ public class Message {
         ALL_LIST_TITLE = PREFIX + format(messageConfig.getConfig().getString("ALL_LIST_TITLE"));
         RESET = PREFIX + format(messageConfig.getConfig().getString("RESET"));
         CANT_RESET = PREFIX + format(messageConfig.getConfig().getString("CANT_RESET"));
+        HELP_HEADER = format(messageConfig.getConfig().getString("HELP_HEADER"));
+        HELP_PVPTIME_SELF = format(messageConfig.getConfig().getString("HELP_PVPTIME_SELF"));
+        HELP_PVPTIME_OTHERS = format(messageConfig.getConfig().getString("HELP_PVPTIME_OTHERS"));
+        HELP_HELP = format(messageConfig.getConfig().getString("HELP_HELP"));
+        HELP_RELOAD = format(messageConfig.getConfig().getString("HELP_RELOAD"));
+        HELP_TIMER = format(messageConfig.getConfig().getString("HELP_TIMER"));
+        HELP_LIST = format(messageConfig.getConfig().getString("HELP_LIST"));
+        HELP_RESET = format(messageConfig.getConfig().getString("HELP_RESET"));
+        HELP_FOOTER = format(messageConfig.getConfig().getString("HELP_FOOTER"));
     }
 
     /**
@@ -63,27 +81,18 @@ public class Message {
         ArrayList<String> help = new ArrayList<>();
 
         help.add("");
-        help.add(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "----------[" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD +
-                "Hardcore" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "Lists" +
-                ChatColor.GRAY + "" + ChatColor.BOLD + " Help"
-                + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]----------");
+        help.add(HELP_HEADER);
 
-        if (player.hasPermission("hardcorelists.pvptime.self"))
-            help.add(ChatColor.GRAY + "/pvptime" + ChatColor.WHITE + ": View your remaining PVP time");
-        if (player.hasPermission("hardcorelists.pvptime.others"))
-            help.add(ChatColor.GRAY + "/pvptime <player>" + ChatColor.WHITE + ": View other's remaining PVP time");
-        if (player.hasPermission("hardcorelists.help"))
-            help.add(ChatColor.GRAY + "/hardcorelists help" + ChatColor.WHITE + ": Show plugin help");
-        if (player.hasPermission("hardcorelists.reload"))
-            help.add(ChatColor.GRAY + "/hardcorelists reload" + ChatColor.WHITE + ": Reload plugin and configs");
-        if (player.hasPermission("hardcorelists.timer"))
-            help.add(ChatColor.GRAY + "/hardcorelists timer <seconds>" + ChatColor.WHITE + ": Update the pvp timer");
-        if (player.hasPermission("hardcorelists.list.dead") || player.hasPermission("hardcorelists.list.alive"))
-            help.add(ChatColor.GRAY + "/hardcorelists list <dead/alive> <page>" + ChatColor.WHITE + ": List players");
-        if (player.hasPermission("hardcorelists.reset"))
-            help.add(ChatColor.GRAY + "hardcorelists reset" + ChatColor.WHITE + ": Reset data (console only)");
+        if (player.hasPermission("hardcorelists.pvptime.self")) help.add(HELP_PVPTIME_SELF);
+        if (player.hasPermission("hardcorelists.pvptime.others")) help.add(HELP_PVPTIME_OTHERS);
+        if (player.hasPermission("hardcorelists.help")) help.add(HELP_HELP);
+        if (player.hasPermission("hardcorelists.reload")) help.add(HELP_RELOAD);
+        if (player.hasPermission("hardcorelists.timer")) help.add(HELP_TIMER);
+        if (player.hasPermission("hardcorelists.list.dead") ||
+                player.hasPermission("hardcorelists.list.alive")) help.add(HELP_LIST);
+        if (player.hasPermission("hardcorelists.reset")) help.add(HELP_RESET);
 
-        help.add(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "--------------------------------------");
+        help.add(HELP_FOOTER);
         help.add("");
 
         String[] out = new String[help.size()];
