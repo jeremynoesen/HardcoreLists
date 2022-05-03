@@ -51,15 +51,13 @@ public class ListHandler implements Listener {
      * save player lists to file
      */
     public static void save() {
-        List<String> alivelist = players.getStringList("alive");
-        alivelist.clear();
+        ArrayList<String> alivelist = new ArrayList<>();
         for (UUID p : alive) {
             alivelist.add(p.toString());
         }
         players.set("alive", alivelist);
-        
-        List<String> deadlist = players.getStringList("dead");
-        deadlist.clear();
+
+        ArrayList<String> deadlist = new ArrayList<>();
         for (UUID p : dead) {
             deadlist.add(p.toString());
         }
