@@ -20,17 +20,17 @@ import java.util.UUID;
  * @author Jeremy Noesen
  */
 public class PvPHandler implements Listener {
-    
+
     /**
      * hashmap with all players and times
      */
     private static final HashMap<UUID, Integer> pvptimes = new HashMap<>();
-    
+
     /**
      * reference to death list file
      */
     private static final YamlConfiguration players = Config.getPlayersConfig().getConfig();
-    
+
     /**
      * get the hashmap of pvp times for players
      *
@@ -39,7 +39,7 @@ public class PvPHandler implements Listener {
     public static HashMap<UUID, Integer> getPvPTimes() {
         return pvptimes;
     }
-    
+
     /**
      * load the player times from file
      */
@@ -48,7 +48,7 @@ public class PvPHandler implements Listener {
             pvptimes.put(UUID.fromString(s), players.getInt("pvp-times." + s));
         }
     }
-    
+
     /**
      * save player times to file
      */
@@ -61,7 +61,7 @@ public class PvPHandler implements Listener {
         }
         Config.getPlayersConfig().saveConfig();
     }
-    
+
     /**
      * get a player's remaining time until they can pvp
      *
@@ -72,19 +72,20 @@ public class PvPHandler implements Listener {
         if (pvptimes.containsKey(player) && pvptimes.get(player) > 0) return pvptimes.get(player);
         return 0;
     }
-    
+
     /**
      * tick a player's time, reduces 1 second
      */
     public static void tickPlayers() {
         for (UUID player : pvptimes.keySet()) {
-            if(pvptimes.containsKey(player) && Bukkit.getOfflinePlayer(player).isOnline()) {
-                if (pvptimes.get(player) == 0) Bukkit.getOfflinePlayer(player).getPlayer().sendMessage(Message.PVP_ENABLED);
+            if (pvptimes.containsKey(player) && Bukkit.getOfflinePlayer(player).isOnline()) {
+                if (pvptimes.get(player) == 0)
+                    Bukkit.getOfflinePlayer(player).getPlayer().sendMessage(Message.PVP_ENABLED);
                 if (pvptimes.get(player) > -1) pvptimes.put(player, pvptimes.get(player) - 1);
             }
         }
     }
-    
+
     /**
      * check if the player or damager can not pvp
      *
@@ -99,7 +100,7 @@ public class PvPHandler implements Listener {
         }
         return true;
     }
-    
+
     /**
      * cancels the pvp event if one or the other parties has pvp disabled
      *
@@ -114,7 +115,7 @@ public class PvPHandler implements Listener {
             e.setCancelled(!canPvP(e.getEntity().getUniqueId(), ((Player) ((Projectile) e.getDamager()).getShooter()).getUniqueId()));
         }
     }
-    
+
     /**
      * initialize a new player's clock
      *
@@ -125,12 +126,11 @@ public class PvPHandler implements Listener {
         Player player = e.getPlayer();
         if (!pvptimes.containsKey(player.getUniqueId())) {
             pvptimes.put(player.getUniqueId(), Config.getTimeConfig().getConfig().getInt("pvp-countdown-seconds"));
-            e.getPlayer().sendMessage(Message.PVP_DISABLED
+            e.getPlayer().sendMessage(Message.CHECK_TIME_SELF
                     .replace("$TIME$", Message.convertTime(pvptimes.get(player.getUniqueId()))));
         } else {
-            player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                    Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId())))
-                    .replace("$PLAYER$", "You"));
+            player.sendMessage(Message.CHECK_TIME_SELF.replace("$TIME$",
+                    Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId()))));
         }
     }
 }

@@ -16,9 +16,9 @@ public class Message {
 
     public static String PREFIX;
     public static String PVP_ENABLED;
-    public static String PVP_DISABLED;
     public static String CANT_HURT;
-    public static String CHECK_TIME;
+    public static String CHECK_TIME_SELF;
+    public static String CHECK_TIME_OTHERS;
     public static String UNKNOWN_ARGS;
     public static String NO_PERMISSION;
     public static String RELOAD;
@@ -37,9 +37,9 @@ public class Message {
     public static void reloadMessages() {
         PREFIX = format(messageConfig.getConfig().getString("PREFIX"));
         PVP_ENABLED = PREFIX + format(messageConfig.getConfig().getString("PVP_ENABLED"));
-        PVP_DISABLED = PREFIX + format(messageConfig.getConfig().getString("PVP_DISABLED"));
         CANT_HURT = PREFIX + format(messageConfig.getConfig().getString("CANT_HURT"));
-        CHECK_TIME = PREFIX + format(messageConfig.getConfig().getString("CHECK_TIME"));
+        CHECK_TIME_SELF = PREFIX + format(messageConfig.getConfig().getString("CHECK_TIME_SELF"));
+        CHECK_TIME_OTHERS = PREFIX + format(messageConfig.getConfig().getString("CHECK_TIME_OTHERS"));
         UNKNOWN_ARGS = PREFIX + format(messageConfig.getConfig().getString("UNKNOWN_ARGS"));
         NO_PERMISSION = PREFIX + format(messageConfig.getConfig().getString("NO_PERMISSION"));
         RELOAD = PREFIX + format(messageConfig.getConfig().getString("RELOAD"));

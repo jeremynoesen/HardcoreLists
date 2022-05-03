@@ -24,11 +24,11 @@ public class CommandExec implements CommandExecutor {
     /**
      * called when commands are run
      *
-     * @param commandSender
-     * @param command
-     * @param label
-     * @param args
-     * @return
+     * @param commandSender command sender
+     * @param command       command
+     * @param label         part of command immediately followed by /
+     * @param args          command arguments
+     * @return true
      */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
@@ -43,7 +43,7 @@ public class CommandExec implements CommandExecutor {
                             try {
                                 OfflinePlayer other = Bukkit.getPlayer(args[0]);
                                 assert other.isOnline();
-                                player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
+                                player.sendMessage(Message.CHECK_TIME_OTHERS.replace("$TIME$",
                                                 Message.convertTime(PvPHandler.getPlayerTime(other.getUniqueId())))
                                         .replace("$PLAYER$", other.getName()));
                             } catch (Exception e) {
@@ -52,9 +52,8 @@ public class CommandExec implements CommandExecutor {
                         } else player.sendMessage(Message.NO_PERMISSION);
                     } else {
                         if (player.hasPermission("hardcorelists.pvptime.self")) {
-                            player.sendMessage(Message.CHECK_TIME.replace("$TIME$",
-                                            Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId())))
-                                    .replace("$PLAYER$", "You"));
+                            player.sendMessage(Message.CHECK_TIME_SELF.replace("$TIME$",
+                                    Message.convertTime(PvPHandler.getPlayerTime(player.getUniqueId()))));
                         } else player.sendMessage(Message.NO_PERMISSION);
                     }
                     break;
