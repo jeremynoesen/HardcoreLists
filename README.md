@@ -53,6 +53,3 @@ For the message configuration, you can use color codes. You can also use the pla
 3. `/build/libs/HardcoreLists.jar` should have been generated.
 
 You can also grab `HardcoreLists.jar` from the latest releases.
-
-## Notice
-This project is no longer in development.
